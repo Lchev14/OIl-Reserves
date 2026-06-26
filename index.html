@@ -3,267 +3,334 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Hormuz 2026 — Crude Reserve & Restocking Terminal</title>
+<title>Did the Hormuz war drain the world's oil reserves? — Jun 2026</title>
 <style>
   :root{
-    --ink:#08161f; --panel:#0e2230; --panel2:#132d3d; --line:#1d3d50;
-    --txt:#e6eef2; --dim:#8aa6b4; --amber:#f5a623; --cyan:#39c0c8;
-    --good:#2bb673; --warn:#e8a13a; --bad:#e1564b; --grid:#1a3344;
-    --mono:'SF Mono',ui-monospace,'Roboto Mono',Menlo,Consolas,monospace;
-    --sans:'Inter',-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    --bg:#0a1117; --bg2:#0f1822; --card:#121e29; --card2:#162636;
+    --line:#21384a; --txt:#eaf1f6; --dim:#93a8b6; --faint:#6b8392;
+    --amber:#f3a738; --cyan:#3fbecb; --red:#e7584c; --green:#34b87a; --violet:#a98be0;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:linear-gradient(180deg,#06121a,#08161f 40%);color:var(--txt);font-family:var(--sans);font-size:13px;line-height:1.45}
-  .wrap{max-width:1280px;margin:0 auto;padding:0 18px 60px}
-  header.term{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:2px solid var(--amber);
-    padding:14px 18px;background:#06121a;position:sticky;top:0;z-index:5}
-  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.5px;color:var(--amber);font-size:15px}
-  .brand small{color:var(--dim);font-weight:400;letter-spacing:0}
-  .tick{font-family:var(--mono);font-size:12px;color:var(--dim);display:flex;gap:6px;align-items:center}
-  .tick b{color:var(--txt)}
-  .up{color:var(--good)} .dn{color:var(--bad)} .fl{color:var(--amber)}
-  .verdict{margin-left:auto;font-family:var(--mono);font-size:12px;background:#2a0f0d;border:1px solid var(--bad);
-    color:#ffd0cb;padding:5px 10px;border-radius:4px}
-  h2.sec{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cyan);margin:30px 0 12px;
-    border-left:3px solid var(--cyan);padding-left:10px}
-  .grid{display:grid;gap:14px}
-  .kpis{grid-template-columns:repeat(6,1fr)}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:14px}
-  .kpi .lbl{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim)}
-  .kpi .val{font-family:var(--mono);font-size:21px;font-weight:700;margin-top:4px}
-  .kpi .sub{font-size:10.5px;color:var(--dim);margin-top:3px}
-  table{width:100%;border-collapse:collapse;font-size:12px}
-  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--grid);white-space:nowrap}
-  th{font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--dim);font-weight:600;position:sticky;top:54px;background:var(--panel)}
-  td.l,th.l{text-align:left}
-  td.num{font-family:var(--mono)}
-  tr:hover td{background:#10293799}
-  .tag{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:3px;letter-spacing:.3px}
-  .t-ver{background:#0c3325;color:#7ee2b0} .t-inf{background:#3a2f10;color:#f2cf85}
-  .t-mod{background:#3a210f;color:#f0b487} .t-abs{background:#23323a;color:#9fb4be}
-  .bar{height:7px;border-radius:3px;background:#16313f;position:relative;overflow:hidden;min-width:46px;display:inline-block;width:60px;vertical-align:middle}
-  .bar > i{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
-  .risk-hi{color:var(--bad);font-weight:700} .risk-md{color:var(--warn)} .risk-lo{color:var(--good)}
-  .two{grid-template-columns:1.1fr .9fr}
-  .three{grid-template-columns:1fr 1fr 1fr}
-  .cap{font-size:11px;color:var(--dim);margin-top:8px;line-height:1.5}
-  .scn h4{margin:0 0 6px;font-family:var(--mono);font-size:13px}
-  .scn.s1 h4{color:var(--good)} .scn.s2 h4{color:var(--amber)} .scn.s3 h4{color:var(--bad)}
-  .scn .row{display:flex;gap:8px;font-size:11.5px;padding:4px 0;border-bottom:1px solid var(--grid)}
-  .scn .row span:first-child{color:var(--dim);min-width:74px}
-  .banner{background:#2a0f0d;border:1px solid var(--bad);border-radius:6px;padding:12px 14px;font-size:12px;color:#ffd9d4;margin-top:14px}
-  .banner b{color:#ff9d92}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:10.5px;color:var(--dim);margin-top:8px}
-  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
-  svg text{font-family:var(--mono);fill:var(--dim);font-size:10px}
-  .foot{margin-top:34px;font-size:10.5px;color:#5f7e8c;border-top:1px solid var(--line);padding-top:12px}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px 70px}
+  header{background:linear-gradient(180deg,#0c1620,#0a1117);border-bottom:1px solid var(--line);padding:16px 20px;position:sticky;top:0;z-index:10}
+  .hd{max-width:1100px;margin:0 auto;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .hd .t{font-weight:700;font-size:15px;letter-spacing:.2px}
+  .hd .meta{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-left:auto}
+
+  .hero{margin:34px 0 10px}
+  .eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--cyan);font-weight:600}
+  .hero h1{font-size:30px;line-height:1.2;margin:10px 0 4px;font-weight:700;letter-spacing:-.3px}
+  .hero .answer{font-size:18px;color:var(--txt);margin:14px 0 0;max-width:880px}
+  .hero .answer b{color:var(--amber)}
+  .lede{font-size:14.5px;color:var(--dim);max-width:880px;margin:14px 0 0}
+
+  .split{margin:22px 0 6px;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:18px 20px}
+  .split .cap{font-size:13px;color:var(--dim);margin-bottom:10px}
+  .splitbar{display:flex;height:46px;border-radius:7px;overflow:hidden;font-size:12.5px;font-weight:600}
+  .splitbar div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 8px;color:#0a1117}
+  .s20{background:var(--amber);width:20%}
+  .s80{background:linear-gradient(90deg,#e7584c,#c5402f);width:80%;color:#fff}
+  .splitkey{display:flex;gap:26px;margin-top:12px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
+  .splitkey b{color:var(--txt)}
+
+  h2{font-size:21px;margin:46px 0 4px;letter-spacing:-.2px}
+  .sub{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:840px}
+  .so{display:inline-block;background:#16293a;border-left:3px solid var(--cyan);color:#cfe6ec;font-size:13px;padding:8px 12px;border-radius:0 6px 6px 0;margin:0 0 16px}
+
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .kpi .lab{font-size:12px;color:var(--dim);font-weight:600}
+  .kpi .v{font-family:var(--mono);font-size:26px;font-weight:700;margin:8px 0 2px}
+  .kpi .ex{font-size:12.5px;color:var(--faint);line-height:1.45}
+  .kpi .v small{font-size:14px;color:var(--dim);font-weight:400}
+  .up{color:var(--green)} .dn{color:var(--red)} .fl{color:var(--amber)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:6px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid #1b2d3c}
+  th{font-size:11.5px;color:var(--dim);font-weight:600}
+  td.n{font-family:var(--mono);text-align:right}
+  .barwrap{display:flex;align-items:center;gap:8px}
+  .barwrap .track{flex:1;height:8px;border-radius:4px;position:relative;min-width:70px;background:#172a39}
+  .barwrap .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+  .barwrap .lab{font-family:var(--mono);font-size:12px;color:var(--dim);min-width:42px;text-align:right}
+  .pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .p-exp{background:#3a1714;color:#ff9d92} .p-mod{background:#3a2e12;color:#f4cf84} .p-ins{background:#0f3325;color:#7fe2b3}
+
+  .scn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:820px){.scn{grid-template-columns:1fr}}
+  .sc{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--card)}
+  .sc .tag{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px;display:inline-block;margin-bottom:10px}
+  .sc1 .tag{background:#0f3325;color:#7fe2b3} .sc2 .tag{background:#3a2e12;color:#f4cf84} .sc3 .tag{background:#3a1714;color:#ff9d92}
+  .sc .ln{font-size:12.8px;color:var(--dim);padding:5px 0;border-top:1px solid #1b2d3c;display:flex;gap:8px}
+  .sc .ln b{color:var(--txt);font-weight:600;min-width:52px}
+  .sc h4{margin:0;font-size:15px}
+
+  svg text{font-family:var(--sans);fill:var(--dim)}
+  .terms{font-size:12.5px;color:var(--faint);background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:14px 16px;margin-top:14px;line-height:1.6}
+  .terms b{color:var(--dim)}
+  .foot{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--faint);line-height:1.6}
   a{color:var(--cyan)}
 </style>
 </head>
 <body>
-<header class="term">
-  <div class="brand">HORMUZ·2026 <small>CRUDE RESERVE & RESTOCKING TERMINAL</small></div>
-  <div class="tick">BRENT <b>$74.43</b> <span class="dn">▼ war-risk bled out</span></div>
-  <div class="tick">HORMUZ <b class="fl">4.8 mb/d</b> <span class="dim">contested-flowing (32% prewar)</span></div>
-  <div class="tick">US SPR <b>331 mb</b> <span class="dn">▼ lowest since 1983</span></div>
-  <div class="verdict">THESIS: <b>REFUTED</b> · ρ = 0.195</div>
+<header>
+  <div class="hd">
+    <span class="t">🛢 Hormuz 2026 · Global Oil Reserve Monitor</span>
+    <span class="meta">as of 26 Jun 2026 · 118 days into the war</span>
+  </div>
 </header>
 
 <div class="wrap">
 
-  <h2 class="sec">Key indicators · as-of 26 Jun 2026 · war start 28 Feb · T = 118 days</h2>
-  <div class="grid kpis">
-    <div class="panel kpi"><div class="lbl">Brent now</div><div class="val">$74.43</div><div class="sub">$72 eve-of-war · $120 peak</div></div>
-    <div class="panel kpi"><div class="lbl">Hormuz flow</div><div class="val fl">4.8</div><div class="sub">mb/d · vs 15 prewar</div></div>
-    <div class="panel kpi"><div class="lbl">US SPR</div><div class="val">331</div><div class="sub">mb · 46% of nameplate</div></div>
-    <div class="panel kpi"><div class="lbl">IEA release</div><div class="val">400</div><div class="sub">mb · ~46% executed</div></div>
-    <div class="panel kpi"><div class="lbl">VLCC rate</div><div class="val">$180k</div><div class="sub">/day · >3× prewar</div></div>
-    <div class="panel kpi"><div class="lbl">ρ (conserv.)</div><div class="val" style="color:var(--bad)">0.195</div><div class="sub">≪ 1 → refuted</div></div>
+  <div class="hero">
+    <div class="eyebrow">The question</div>
+    <h1>Did the 2026 Hormuz war drain the world's oil reserves — or just shuffle them from buyers to sellers?</h1>
+    <p class="answer">It <b>drained</b> them. For every 100 barrels that oil-buying countries pulled out of their reserves, only about <b>20</b> piled up unsold on the producer side. The other <b>80</b> were either used up or never pumped at all.</p>
+    <p class="lede">When Iran's strikes closed the Strait of Hormuz on 28 Feb 2026, Gulf producers couldn't store the oil they could no longer ship — their tanks filled within two weeks, so they shut wells instead of stockpiling. Importing countries drew down their strategic reserves to cope. Refilling is now the hard part, because the bottleneck is the Strait itself, not the oilfields.</p>
   </div>
 
-  <div class="grid two" style="margin-top:14px">
-    <div class="panel">
-      <h2 class="sec" style="margin-top:0">Redistribution ledger — where the ~1,200 mb gap went</h2>
-      <svg id="waterfall" viewBox="0 0 560 260" width="100%" height="260" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="cap">Oil was <b>destroyed at source</b>, not redistributed. Producers shut in ~700–1,080 mb at the wellhead (tankage saturated in ~1–2 weeks) vs only ~120 mb genuinely stranded. ρ = producer build / consumer draw = 120/615 = <b>0.195</b>.</div>
+  <div class="split">
+    <div class="cap">What happened to the oil the Strait blockage took off the market — was it relocated, or lost?</div>
+    <div class="splitbar">
+      <div class="s20" title="Oil that physically piled up on tankers and in Gulf storage behind the Strait — about 120 million barrels.">~20% relocated</div>
+      <div class="s80" title="Oil drawn out of consumer reserves or never produced (wells shut in) — the bulk of the disruption.">~80% drawn from reserves or never produced</div>
     </div>
-    <div class="panel">
-      <h2 class="sec" style="margin-top:0">Stock trajectory — inflection NOT yet turned</h2>
-      <svg id="traj" viewBox="0 0 560 260" width="100%" height="260" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="cap">OECD stocks −540 mb and SPR −80 mb decline <b>monotonically</b> through the latest print — no build-week yet. Price & freight have inflected; <b>stock has not</b>. Earliest plausible turn: Q4 2026.</div>
+    <div class="splitkey">
+      <span><b>Relocated</b> ≈ 120 million barrels stuck in Gulf storage &amp; on tankers</span>
+      <span><b>Drawn down / lost</b> ≈ 615 mb pulled from reserves + ~775 mb never pumped</span>
     </div>
   </div>
 
-  <h2 class="sec">Consumer reserve cover — sorted by chokepoint fragility</h2>
-  <div class="panel" style="overflow:auto;max-height:560px">
-  <table id="consumer">
-    <thead><tr>
-      <th class="l">Country</th><th>Before d</th><th>Today d</th><th>Today mo</th><th>Δ%</th>
-      <th class="l">Hormuz-dep</th><th>Eff. at-risk d</th><th class="l">Confidence</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
-  <div class="legend">
-    <span><i style="background:#e1564b"></i>≤30 d effective (fragile)</span>
-    <span><i style="background:#e8a13a"></i>30–70 d</span>
-    <span><i style="background:#2bb673"></i>>70 d (insulated)</span>
-    <span style="margin-left:auto">Eff. at-risk = days × (1 − Hormuz-dep) — worst-case zero-replacement <b>bound</b>, not a coverage estimate</span>
-  </div>
+  <h2>Where the market stands today</h2>
+  <p class="sub">Six numbers that frame the situation, each compared with where it was before the war. <span style="color:var(--faint)">(“mb” = million barrels · “mb/d” = million barrels per day)</span></p>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="lab">Oil price (Brent crude)</div>
+      <div class="v">$74<small> /barrel</small></div>
+      <div class="ex">Back near the pre-war level (~$72). It spiked to $120 in March; the war-risk premium has since faded.</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Oil moving through the Strait of Hormuz</div>
+      <div class="v fl">4.8<small> of 15 mb/d</small></div>
+      <div class="ex">Only about a third of the normal flow. The Strait is reopening but still the main bottleneck.</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">US Strategic Petroleum Reserve</div>
+      <div class="v dn">331<small> mb</small></div>
+      <div class="ex">Down 80 mb (−19%) since December — its lowest level since 1983.</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Reserves drawn down worldwide</div>
+      <div class="v dn">≈615<small> mb</small></div>
+      <div class="ex">Pulled from government and commercial stockpiles since the war began, to replace blocked Gulf supply.</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Oil never produced (wells shut in)</div>
+      <div class="v dn">≈700–1,080<small> mb</small></div>
+      <div class="ex">Gulf production stopped at the wellhead because there was nowhere to store or ship it.</div>
+    </div>
+    <div class="kpi">
+      <div class="lab">Earliest reserves can start refilling</div>
+      <div class="v">Q4 2026</div>
+      <div class="ex">Refilling can't really begin until the Strait normalises and demand recovers — months away.</div>
+    </div>
   </div>
 
-  <div class="grid two" style="margin-top:14px">
-    <div class="panel" style="overflow:auto">
-      <h2 class="sec" style="margin-top:0">Producer reserve cover — Gulf-6 (deployable vs stranded)</h2>
-      <table id="producer">
-        <thead><tr><th class="l">Country</th><th>Deploy d</th><th>Total d</th><th>Util %</th><th>Bypass mb/d</th><th>Shut-in mb/d</th></tr></thead>
+  <h2>Who is most exposed?</h2>
+  <p class="sub">A country's “days of cover” (how long its reserves could replace normal imports) looks reassuring for Asia — but that misses the real risk: <b>how much of its oil normally comes through the Strait of Hormuz.</b> Japan holds 205 days of cover, yet 90% of its crude sails through the Strait. Sorted below by that exposure, highest first.</p>
+  <span class="so">The headline buffer hides the danger: the most “covered” countries are often the most Strait-dependent.</span>
+  <div class="panel" style="overflow:auto">
+    <table id="ctab">
+      <thead><tr>
+        <th>Country</th>
+        <th>Reserve cover — days of imports it can replace</th>
+        <th>Share of oil imports via the Strait of Hormuz</th>
+        <th>Exposure</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="terms">
+    <b>How to read it.</b> &nbsp;<b>Days of cover</b> = how many days a country could fully replace its normal oil imports from reserves if imports stopped — bigger is safer.
+    &nbsp;<b>Share via Hormuz</b> = how much of its crude normally passes through the Strait — bigger is riskier.
+    &nbsp;<b>Exposure</b> rates the combination: <span class="pill p-exp">Exposed</span> = over half its oil runs through the Strait; <span class="pill p-mod">Moderate</span> = 20–50%; <span class="pill p-ins">Insulated</span> = under 20%.
+    &nbsp;“–” means no comparable figure is published (e.g. the US and Netherlands are net exporters, so the metric doesn't apply).
+  </div>
+
+  <h2>Where did all the oil go?</h2>
+  <p class="sub">The Strait blockage took roughly 1,200 million barrels of supply off the market over four months. Two charts: how the world absorbed that shock, and what became of the blocked Gulf oil.</p>
+  <div class="grid2">
+    <div class="panel">
+      <h4 style="margin:0 0 4px">How the world coped with the shortfall</h4>
+      <p style="font-size:12.5px;color:var(--faint);margin:0 0 8px">Three offsets filled most of the gap.</p>
+      <svg id="coped" viewBox="0 0 480 150" width="100%" height="150"></svg>
+    </div>
+    <div class="panel">
+      <h4 style="margin:0 0 4px">What happened to the blocked Gulf oil</h4>
+      <p style="font-size:12.5px;color:var(--faint);margin:0 0 8px">Most of it was never produced — not relocated. <b style="color:var(--amber)">This is the 20 / 80 split.</b></p>
+      <svg id="blocked" viewBox="0 0 480 110" width="100%" height="110"></svg>
+    </div>
+  </div>
+
+  <h2>Why refilling will be slow</h2>
+  <p class="sub">Pipelines that route Gulf oil to the sea <i>without</i> using the Strait can only carry a fraction of what normally passes through it. So even with reserves low, the world can't quickly pump and ship replacement barrels.</p>
+  <span class="so">The oilfields aren't the limit — the Strait is. Spare production capacity is stranded behind it.</span>
+  <div class="grid2">
+    <div class="panel">
+      <h4 style="margin:0 0 8px">Oil leaving the Gulf: normal vs. what bypass routes can carry</h4>
+      <svg id="bypass" viewBox="0 0 480 200" width="100%" height="200"></svg>
+    </div>
+    <div class="panel">
+      <h4 style="margin:0 0 8px">Producers: full tanks, shut wells</h4>
+      <p style="font-size:12.5px;color:var(--faint);margin:0 0 10px">All six Gulf producers ran their storage near full and stopped pumping the surplus.</p>
+      <table id="ptab" style="font-size:12.5px">
+        <thead><tr><th>Producer</th><th>Storage full</th><th>Production shut in</th><th>Can avoid Strait?</th></tr></thead>
         <tbody></tbody>
       </table>
-      <div class="cap">Saudi shows 31.9 total days but only <b>7.7 deployable</b> — the rest is stranded behind the strait. OPEC spare is double-trapped: pumpable but not shippable; Kuwait & Basrah have zero bypass.</div>
-    </div>
-    <div class="panel">
-      <h2 class="sec" style="margin-top:0">Throughput — bypass ceiling vs stranded</h2>
-      <svg id="bypass" viewBox="0 0 540 230" width="100%" height="230" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="cap">Normal Hormuz crude ~15 mb/d. Bypass realized only ~5.7 (Yanbu port-gated, not pipeline-gated). End-state stranded ~4.5 mb/d.</div>
     </div>
   </div>
 
-  <h2 class="sec">Scenario tree — Hormuz duration (probabilities unweighted)</h2>
-  <div class="grid three">
-    <div class="panel scn s1"><h4>S1 · Reopen-fast</h4>
-      <div class="row"><span>Trigger</span><span>Ceasefire → settlement; IRGC lifts closure</span></div>
-      <div class="row"><span>Reserves</span><span>Draw halts then reverses; slow SPR refill</span></div>
-      <div class="row"><span>Brent</span><span>$60–68</span></div>
-      <div class="row"><span>Restock</span><span>Multi-quarter, bypass-gated (~3–4 yr SPR)</span></div>
-    </div>
-    <div class="panel scn s2"><h4>S2 · Contested-grinding <small style="color:var(--dim)">(base)</small></h4>
-      <div class="row"><span>Trigger</span><span>Ceasefire holds, doesn't convert; ~4.8 mb/d</span></div>
-      <div class="row"><span>Reserves</span><span>Slow draw; SPR 1.29→0.72 mb/d; ρ~0.20</span></div>
-      <div class="row"><span>Brent</span><span>$70–85, spikes decay in days</span></div>
-      <div class="row"><span>Restock</span><span>None — net draw continues</span></div>
-    </div>
-    <div class="panel scn s3"><h4>S3 · Reclose-hard</h4>
-      <div class="row"><span>Trigger</span><span>Ceasefire collapses; mining/interdiction</span></div>
-      <div class="row"><span>Reserves</span><span>Draw re-accelerates; Gulf re-strands</span></div>
-      <div class="row"><span>Brent</span><span>Toward/above $120</span></div>
-      <div class="row"><span>Hard clock</span><span class="risk-hi">US SPR→150 mb floor ~5 Nov 2026</span></div>
-    </div>
+  <h2>Reserves are still falling — no turn yet</h2>
+  <p class="sub">Both the world's pooled reserves and the US strategic reserve have dropped every month since the war. Prices have calmed, but the stockpiles have not started rebuilding.</p>
+  <div class="panel">
+    <svg id="traj" viewBox="0 0 900 260" width="100%" height="260"></svg>
   </div>
 
-  <div class="banner">
-    <b>Data-integrity caveat (load-bearing).</b> Verification was <b>not fully independent</b>: primary IEA OMR / EIA weekly hosts were egress-proxy-403-blocked at run time, so many cells are <b>wire-attributed</b> (one tier below Verified). Re-pull iea.org / eia.gov directly before external use. Isolated red team raised 10 attacks, all addressed in-run; verify verdict: ship.
+  <h2>What happens next — three paths</h2>
+  <p class="sub">Everything hinges on whether the fragile June ceasefire holds and the Strait fully reopens.</p>
+  <div class="scn">
+    <div class="sc sc1">
+      <span class="tag">PATH 1 · Strait reopens</span>
+      <h4>Calm returns</h4>
+      <div class="ln"><b>Trigger</b><span>Ceasefire becomes a real settlement; shipping normalises.</span></div>
+      <div class="ln"><b>Reserves</b><span>Stop falling, slowly start to refill.</span></div>
+      <div class="ln"><b>Oil price</b><span>Eases to $60–68.</span></div>
+      <div class="ln"><b>Refill</b><span>Begins, but takes years to fully restore.</span></div>
+    </div>
+    <div class="sc sc2">
+      <span class="tag">PATH 2 · Stays contested (most likely)</span>
+      <h4>Slow grind</h4>
+      <div class="ln"><b>Trigger</b><span>Ceasefire holds but tensions persist; flow stuck near today's level.</span></div>
+      <div class="ln"><b>Reserves</b><span>Keep draining slowly.</span></div>
+      <div class="ln"><b>Oil price</b><span>$70–85, with headline-driven spikes.</span></div>
+      <div class="ln"><b>Refill</b><span>Doesn't start — reserves keep falling.</span></div>
+    </div>
+    <div class="sc sc3">
+      <span class="tag">PATH 3 · Strait re-closes</span>
+      <h4>Renewed crisis</h4>
+      <div class="ln"><b>Trigger</b><span>Ceasefire collapses; the Strait is blocked again.</span></div>
+      <div class="ln"><b>Reserves</b><span>Drain fast; US reserve hits its operating floor by ~Nov 2026.</span></div>
+      <div class="ln"><b>Oil price</b><span>Spikes back toward $120+.</span></div>
+      <div class="ln"><b>Refill</b><span>Off the table for 2026.</span></div>
+    </div>
   </div>
 
   <div class="foot">
-    Source: workflow run <span style="font-family:var(--mono)">wf_9642a98b-45e</span> · 52 agents · ~1.9M tokens · as-of 26 Jun 2026.
-    Single-file, no external dependencies — deployable to Vercel as-is. Figures decay fast; re-run to refresh.
+    <b>Sources &amp; confidence.</b> Built from IEA, EIA, OPEC and major financial-press reporting, as of 26 Jun 2026. Several primary government sources (IEA / EIA data portals) were unreachable at compile time, so some figures come from news outlets quoting them rather than the originals — treat exact decimals as provisional and re-check before any financial decision. Reserve “days of cover” follow the IEA net-import-cover convention; net-exporting countries (US, Netherlands) carry no figure because the measure doesn't apply to them.<br>
+    Generated from a 52-agent research-and-verification pipeline · run wf_9642a98b-45e. Single static page — no tracking, no external dependencies.
   </div>
 </div>
 
 <script>
 const consumer=[
- {c:"Philippines",b:null,t:46.47,dep:.95,risk:2.3,conf:"inf"},
- {c:"Vietnam",b:null,t:40.3,dep:.88,risk:4.8,conf:"inf"},
- {c:"Indonesia",b:null,t:21,dep:.20,risk:16.8,conf:"inf"},
- {c:"Japan",b:200,t:205,dep:.90,risk:20.5,conf:"inf"},
- {c:"South Korea",b:208,t:205,dep:.90,risk:20.5,conf:"inf"},
- {c:"Thailand",b:null,t:117,dep:.55,risk:52.7,conf:"inf"},
- {c:"India",b:74,t:76,dep:.30,risk:53.2,conf:"inf"},
- {c:"China",b:122.5,t:130,dep:.46,risk:70.2,conf:"inf"},
- {c:"Italy",b:null,t:90,dep:.18,risk:73.8,conf:"inf"},
- {c:"Poland",b:null,t:86.5,dep:.13,risk:75.3,conf:"mod"},
- {c:"UK",b:104,t:90,dep:.07,risk:83.7,conf:"inf"},
- {c:"Spain",b:120,t:91,dep:.06,risk:85.5,conf:"mod"},
- {c:"France",b:98,t:98,dep:.11,risk:87.2,conf:"inf"},
- {c:"Germany",b:null,t:99.1,dep:.05,risk:94.1,conf:"mod"},
- {c:"USA",b:null,t:null,dep:.08,risk:null,conf:"abs"},
- {c:"Netherlands",b:null,t:null,dep:.06,risk:null,conf:"abs"},
+ {c:"Japan",cover:205,dep:.90},{c:"South Korea",cover:205,dep:.90},
+ {c:"Philippines",cover:46,dep:.95},{c:"Vietnam",cover:40,dep:.88},
+ {c:"Thailand",cover:117,dep:.55},{c:"China",cover:130,dep:.46},
+ {c:"India",cover:76,dep:.30},{c:"Indonesia",cover:21,dep:.20},
+ {c:"Italy",cover:90,dep:.18},{c:"Poland",cover:87,dep:.13},
+ {c:"France",cover:98,dep:.11},{c:"UK",cover:90,dep:.07},
+ {c:"Spain",cover:91,dep:.06},{c:"Netherlands",cover:null,dep:.06},
+ {c:"USA",cover:null,dep:.08},{c:"Germany",cover:99,dep:.05},
 ];
 const producer=[
- {c:"Saudi Arabia",d:7.7,tot:31.9,u:.92,byp:4.5,shut:2.3},
- {c:"UAE",d:9,tot:14,u:.90,byp:1.8,shut:1.4},
- {c:"Iran",d:6,tot:57,u:.91,byp:0.1,shut:1.45},
- {c:"Iraq",d:0.3,tot:4.7,u:.95,byp:0.3,shut:1.5},
- {c:"Kuwait",d:4.2,tot:16,u:.90,byp:0,shut:2.0},
- {c:"Qatar",d:0,tot:10.5,u:.92,byp:0,shut:0.95},
+ {c:"Saudi Arabia",full:.92,shut:2.3,bypass:"Partly — Red Sea pipeline"},
+ {c:"UAE",full:.90,shut:1.4,bypass:"Partly — Fujairah pipeline"},
+ {c:"Iran",full:.91,shut:1.45,bypass:"Barely"},
+ {c:"Iraq",full:.95,shut:1.5,bypass:"No (southern fields)"},
+ {c:"Kuwait",full:.90,shut:2.0,bypass:"No"},
+ {c:"Qatar",full:.92,shut:0.95,bypass:"No"},
 ];
-const TAG={ver:["t-ver","Verified"],inf:["t-inf","Inferred"],mod:["t-mod","Modelled-EST"],abs:["t-abs","Absent"]};
-const fmt=v=>v==null?"–":(Math.round(v*10)/10).toFixed(1);
-const riskClass=v=>v==null?"":v<=30?"risk-hi":v<=70?"risk-md":"risk-lo";
-const barColor=v=>v==null?"#33505f":v<=30?"#e1564b":v<=70?"#e8a13a":"#2bb673";
 
-const ctb=document.querySelector("#consumer tbody");
-consumer.forEach(r=>{
-  const dpct=(c=>`<span class="bar"><i style="width:${Math.round(r.dep*100)}%;background:${r.dep>=.7?'#e1564b':r.dep>=.4?'#e8a13a':'#39c0c8'}"></i></span> ${Math.round(r.dep*100)}%`)();
-  const dpc=r.b!=null&&r.t!=null?`${(((r.t-r.b)/r.b*100)>=0?'+':'')}${((r.t-r.b)/r.b*100).toFixed(1)}%`:"–";
-  ctb.insertAdjacentHTML("beforeend",`<tr>
-   <td class="l">${r.c}</td>
-   <td class="num">${fmt(r.b)}</td>
-   <td class="num">${fmt(r.t)}</td>
-   <td class="num">${r.t!=null?(r.t/30.44).toFixed(1):"–"}</td>
-   <td class="num ${r.b!=null&&r.t!=null?((r.t-r.b)<0?'dn':'up'):''}">${dpc}</td>
-   <td class="l">${dpct}</td>
-   <td class="num ${riskClass(r.risk)}">${fmt(r.risk)}</td>
-   <td class="l"><span class="tag ${TAG[r.conf][0]}">${TAG[r.conf][1]}</span></td>
-  </tr>`);
+const expClass=d=>d>=.5?["p-exp","Exposed"]:d>=.2?["p-mod","Moderate"]:["p-ins","Insulated"];
+const depColor=d=>d>=.5?"#e7584c":d>=.2?"#f3a738":"#3fbecb";
+const tb=document.querySelector("#ctab tbody");
+const maxCover=210;
+consumer.slice().sort((a,b)=>b.dep-a.dep).forEach(r=>{
+  const [pc,pl]=expClass(r.dep);
+  const coverCell=r.cover==null?`<span style="color:var(--faint)">– not applicable</span>`:
+    `<div class="barwrap"><div class="track"><div class="fill" style="width:${Math.min(100,r.cover/maxCover*100)}%;background:#2f6f8a"></div></div><span class="lab">${r.cover} d</span></div>`;
+  tb.insertAdjacentHTML("beforeend",`<tr>
+    <td>${r.c}</td><td>${coverCell}</td>
+    <td><div class="barwrap"><div class="track"><div class="fill" style="width:${Math.round(r.dep*100)}%;background:${depColor(r.dep)}"></div></div><span class="lab">${Math.round(r.dep*100)}%</span></div></td>
+    <td><span class="pill ${pc}">${pl}</span></td></tr>`);
 });
-const ptb=document.querySelector("#producer tbody");
+
+const ptb=document.querySelector("#ptab tbody");
 producer.forEach(r=>{
-  ptb.insertAdjacentHTML("beforeend",`<tr>
-   <td class="l">${r.c}</td>
-   <td class="num ${r.d<=5?'risk-hi':''}">${r.d}</td><td class="num">${r.tot}</td>
-   <td class="num">${Math.round(r.u*100)}%</td>
-   <td class="num ${r.byp==0?'risk-hi':''}">${r.byp}</td><td class="num">${r.shut}</td>
-  </tr>`);
+  const noBypass=/^No|Barely/.test(r.bypass);
+  ptb.insertAdjacentHTML("beforeend",`<tr><td>${r.c}</td><td class="n">${Math.round(r.full*100)}%</td><td class="n">${r.shut} mb/d</td><td style="color:${noBypass?'#ff9d92':'#9fb4be'}">${r.bypass}</td></tr>`);
 });
 
-// ---- waterfall ----
-(function(){
-  const svg=document.getElementById("waterfall"); const W=560,H=260,pad=34,base=210;
-  const legs=[["Consumer\ndraw",-615,"#e1564b"],["Demand\ndestruct.",-472,"#e8a13a"],
-    ["Atlantic\nsub (in)",+410,"#39c0c8"],["Producer\nbuild",+120,"#2bb673"],["Foregone\noutput",-775,"#8a5a2b"]];
-  const maxAbs=900, sx=(W-2*pad)/legs.length, scale=(base-30)/maxAbs;
-  legs.forEach((l,i)=>{
-    const h=Math.abs(l[1])*scale, x=pad+i*sx+10, w=sx-20;
-    const y=l[1]<0?base:base-h;
+function hbars(svgId,rows,max){
+  const svg=document.getElementById(svgId); const W=480,top=6,rowH=46;
+  rows.forEach((r,i)=>{const y=top+i*rowH;const bw=(r.v/max)*(W-150);
     svg.insertAdjacentHTML("beforeend",
-      `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${l[2]}" rx="2" opacity=".9"/>
-       <text x="${x+w/2}" y="${l[1]<0?base+h+12:base-h-6}" text-anchor="middle" fill="#e6eef2">${l[1]>0?'+':''}${l[1]}</text>`);
-    l[0].split("\n").forEach((t,k)=>svg.insertAdjacentHTML("beforeend",
-      `<text x="${x+w/2}" y="${base+26+k*11}" text-anchor="middle">${t}</text>`));
+      `<text x="2" y="${y+14}" fill="#eaf1f6" font-size="12.5">${r.label}</text>
+       <rect x="2" y="${y+20}" width="${Math.max(2,bw)}" height="14" rx="3" fill="${r.color}"/>
+       <text x="${Math.max(2,bw)+10}" y="${y+31}" fill="#93a8b6" font-size="12">${r.v} mb</text>`);
   });
-  svg.insertAdjacentHTML("beforeend",`<line x1="${pad}" y1="${base}" x2="${W-pad}" y2="${base}" stroke="#1d3d50"/>`);
+}
+hbars("coped",[
+  {label:"Reserves drawn from stockpiles",v:615,color:"#e7584c"},
+  {label:"Less oil used (demand fell)",v:472,color:"#f3a738"},
+  {label:"Oil rerouted the long way (Atlantic)",v:410,color:"#3fbecb"},
+],700);
+hbars("blocked",[
+  {label:"Never produced — wells shut in",v:775,color:"#e7584c"},
+  {label:"Piled up in Gulf storage & tankers",v:120,color:"#f3a738"},
+],800);
+
+(function(){
+  const svg=document.getElementById("bypass");
+  const rows=[
+    {label:"Normal flow through the Strait",v:15,color:"#3fbecb"},
+    {label:"Most it can flow today",v:4.8,color:"#34b87a"},
+    {label:"Pipelines bypassing the Strait (max)",v:6.5,color:"#f3a738"},
+    {label:"Bypass actually used",v:5.7,color:"#a98be0"},
+  ];
+  const W=480,max=15,top=10,rowH=46;
+  rows.forEach((r,i)=>{const y=top+i*rowH;const bw=(r.v/max)*(W-170);
+    svg.insertAdjacentHTML("beforeend",
+     `<text x="2" y="${y+14}" fill="#eaf1f6" font-size="12.5">${r.label}</text>
+      <rect x="2" y="${y+20}" width="${bw}" height="15" rx="3" fill="${r.color}"/>
+      <text x="${bw+10}" y="${y+32}" fill="#93a8b6" font-size="12">${r.v} mb/d</text>`);
+  });
 })();
 
-// ---- trajectory dual-line ----
 (function(){
-  const svg=document.getElementById("traj"); const W=560,H=260,L=44,R=44,T=16,B=40;
-  const wk=["27Feb","13Mar","03Apr","08May","15May","29May","19Jun","26Jun"];
+  const svg=document.getElementById("traj"); const W=900,H=260,L=54,R=58,T=18,B=46;
+  const wk=["27 Feb","13 Mar","3 Apr","8 May","15 May","29 May","19 Jun","26 Jun"];
   const oecd=[4100,4064,4000,3825,3787,3711,3598,3560], spr=[411,411,400.9,384.1,374.2,357.1,331.2,331.2];
   const xn=i=>L+i*(W-L-R)/(wk.length-1);
   const oY=v=>T+(1-(v-3500)/(4150-3500))*(H-T-B);
   const sY=v=>T+(1-(v-320)/(415-320))*(H-T-B);
   const path=(a,f)=>a.map((v,i)=>`${i?'L':'M'}${xn(i).toFixed(1)} ${f(v).toFixed(1)}`).join(" ");
-  // gridlines
-  for(let g=0;g<=4;g++){const y=T+g*(H-T-B)/4;svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#13283400"/>`);}
-  svg.insertAdjacentHTML("beforeend",`<path d="${path(oecd,oY)}" fill="none" stroke="#39c0c8" stroke-width="2"/>`);
-  svg.insertAdjacentHTML("beforeend",`<path d="${path(spr,sY)}" fill="none" stroke="#f5a623" stroke-width="2"/>`);
-  oecd.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${oY(v)}" r="2.4" fill="#39c0c8"/>`));
-  spr.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${sY(v)}" r="2.4" fill="#f5a623"/>`));
-  wk.forEach((w,i)=>svg.insertAdjacentHTML("beforeend",`<text x="${xn(i)}" y="${H-24}" text-anchor="middle">${w}</text>`));
-  svg.insertAdjacentHTML("beforeend",`<text x="${L}" y="${H-8}" fill="#39c0c8">— OECD stock (mb, L)</text><text x="${W-R}" y="${H-8}" text-anchor="end" fill="#f5a623">US SPR (mb, R) —</text>`);
-})();
-
-// ---- bypass bars ----
-(function(){
-  const svg=document.getElementById("bypass"); const W=540,rows=[["Hormuz normal",15,"#39c0c8"],
-    ["Bypass ceiling",6.5,"#e8a13a"],["Bypass realized",5.7,"#f5a623"],["Hormuz now",4.8,"#2bb673"],["Stranded",4.5,"#e1564b"]];
-  const L=120, max=15, sx=(W-L-40)/max;
-  rows.forEach((r,i)=>{const y=18+i*40;
-    svg.insertAdjacentHTML("beforeend",
-     `<text x="${L-8}" y="${y+14}" text-anchor="end" fill="#e6eef2">${r[0]}</text>
-      <rect x="${L}" y="${y}" width="${r[1]*sx}" height="20" rx="3" fill="${r[2]}" opacity=".9"/>
-      <text x="${L+r[1]*sx+6}" y="${y+14}">${r[1]} mb/d</text>`);
-  });
+  svg.insertAdjacentHTML("beforeend",`<path d="${path(oecd,oY)}" fill="none" stroke="#3fbecb" stroke-width="2.5"/>`);
+  svg.insertAdjacentHTML("beforeend",`<path d="${path(spr,sY)}" fill="none" stroke="#f3a738" stroke-width="2.5"/>`);
+  oecd.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${oY(v)}" r="3" fill="#3fbecb"/>`));
+  spr.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${sY(v)}" r="3" fill="#f3a738"/>`));
+  wk.forEach((w,i)=>svg.insertAdjacentHTML("beforeend",`<text x="${xn(i)}" y="${H-26}" text-anchor="middle" font-size="11">${w}</text>`));
+  svg.insertAdjacentHTML("beforeend",
+    `<text x="${L}" y="${H-8}" fill="#3fbecb" font-size="12">— World pooled reserves (million barrels, left scale)</text>
+     <text x="${W-R}" y="${H-8}" text-anchor="end" fill="#f3a738" font-size="12">US strategic reserve (million barrels, right scale) —</text>`);
 })();
 </script>
 </body>
