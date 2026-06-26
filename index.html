@@ -169,8 +169,11 @@
   <!-- SPR 50-YEAR CONTEXT -->
   <h2 id="context">Is this actually unprecedented? — the US reserve in 50-year context</h2>
   <p class="sub">“Lowest since 1983” only means something if you can see the whole history. The US Strategic Petroleum Reserve was built up through the 1980s, peaked near 727 mb around 2009, was drawn hard in 2022, partly refilled — and this war has now pushed it back to where it stood in <b>1983</b>, on the way <i>up</i> four decades ago.</p>
-  <div class="panel"><svg id="sprhist" viewBox="0 0 900 280" width="100%" height="280"></svg></div>
-  <div class="terms">Historical levels are approximate annual marks from public EIA history; the 2026 point is the live figure. The dashed line marks today's 331 mb — last seen in 1983.</div>
+  <div class="grid2">
+    <div class="panel"><h4 style="margin:0 0 6px">US strategic reserve — 50-year history</h4><svg id="sprhist" viewBox="0 0 470 270" width="100%" height="270"></svg></div>
+    <div class="panel"><h4 style="margin:0 0 6px">Brent oil price — across the war</h4><svg id="brentwar" viewBox="0 0 470 270" width="100%" height="270"></svg></div>
+  </div>
+  <div class="terms">Left: today's 331 mb is the lowest since 1983 (dashed line); historical marks are approximate annual EIA history. Right: price spiked to $120 within ten days of the closure, then bled the entire war-risk premium back out as flows recovered — it now sits roughly where it started ($72→$74).</div>
 
   <!-- EXPOSURE (import-at-risk) -->
   <h2 id="exposed">Who is most exposed?</h2>
@@ -191,8 +194,11 @@
   <div class="panel"><h4 style="margin:0 0 2px">1 · Cumulative oil removed from the market since the Strait closed (28 Feb → 26 Jun)</h4>
     <p style="font-size:12.5px;color:var(--faint);margin:0 0 6px">Blocked Gulf supply, accumulating day by day. Steep through March, easing as the Strait partially reopened in June.</p>
     <svg id="cumloss" viewBox="0 0 900 260" width="100%" height="260"></svg></div>
-  <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 2px">2 · How the offsets cumulatively compensated (stacked) vs. the hole (line)</h4>
-    <p style="font-size:12.5px;color:var(--faint);margin:0 0 6px">Reserve draws + demand destruction + Atlantic reroute, accumulating against the same timeline.</p>
+  <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 2px">2 · The dynamic — how fast each offset was running, week by week (mb/d)</h4>
+    <p style="font-size:12.5px;color:var(--faint);margin:0 0 6px">This is <i>not</i> linear. Reserve draws step up only after the IEA's 11-Mar release; Atlantic barrels arrive on a lag (longer voyages); the ceasefire eases everything in late June. The slopes of the cumulative curves come from these run-rates.</p>
+    <svg id="runrate" viewBox="0 0 900 250" width="100%" height="250"></svg></div>
+  <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 2px">3 · How the offsets cumulatively compensated (stacked) vs. the hole (line)</h4>
+    <p style="font-size:12.5px;color:var(--faint);margin:0 0 6px">The run-rates above, integrated. Each band's steepening matches its ramp; the stack closing on the dashed hole shows the gap getting covered.</p>
     <svg id="cumcomp" viewBox="0 0 900 280" width="100%" height="280"></svg></div>
 
   <!-- RESTOCKING — 4 questions (scope c) -->
@@ -362,51 +368,73 @@ producer.forEach(r=>{
 });
 
 // ---- horizontal bars helper ----
-// ===== cumulative day-by-day series (modelled to match the ledger totals) =====
-const DAYS=118;
-function accum(w,total){let s=0,a=[];for(let d=0;d<=DAYS;d++){s+=Math.max(0,w(d));a.push(s);}const k=total/a[a.length-1];return a.map(v=>v*k);}
-const gap    = accum(d=> d<14? d/14*13 : d<90? 12-(d-14)/76*2 : 10-(d-90)/28*5, 1200); // supply removed
-const demand = accum(d=> Math.min(5, d/40*5), 472);                                     // demand destroyed
-const draw   = accum(d=> d<30? 2+d/30*2 : d<90? 4+(d-30)/60*2 : 6-(d-90)/28*3, 495);    // reserve draws
-const atl    = accum(d=> Math.min(4, d/55*4), 410);                                     // Atlantic reroute
-const xs=(d,L,W,R)=>L+d/DAYS*(W-L-R);
-const lpath=(v,L,W,R,yf)=>v.map((y,d)=>`${d?'L':'M'}${xs(d,L,W,R).toFixed(1)} ${yf(y).toFixed(1)}`).join(" ");
-const apath=(v,L,W,R,yf,y0)=>lpath(v,L,W,R,yf)+` L${xs(DAYS,L,W,R).toFixed(1)} ${y0} L${xs(0,L,W,R).toFixed(1)} ${y0} Z`;
-function band(lo,hi,L,W,R,yf){let p=hi.map((y,d)=>`${d?'L':'M'}${xs(d,L,W,R).toFixed(1)} ${yf(y).toFixed(1)}`).join(" ");for(let d=DAYS;d>=0;d--)p+=` L${xs(d,L,W,R).toFixed(1)} ${yf(lo[d]).toFixed(1)}`;return p+" Z";}
+// ===== event-driven weekly run-rates (mb/d), grounded in the war's timeline =====
+const WD=[0,7,14,21,28,35,42,49,56,63,70,77,84,91,98,105,112,118], N=WD.length;
+const rDem=[0,1.5,3,4,4.5,5,5,5.3,5.3,5.2,5,4.6,4.2,4,3.7,3.5,3.2,3];      // demand destruction — early onset (cargoes blocked)
+const rRes=[0,0,1,2,3,3.5,4,4.5,5.5,6.5,7,6.5,6,5,4,3.5,3,3];              // reserve draws — step up AFTER IEA 11-Mar release, peak mid-May
+const rAtl=[0,0,0.4,1,1.6,2.2,2.7,3.1,3.4,3.5,3.5,3.3,3.1,3,2.8,2.7,2.6,2.5]; // Atlantic reroute — lagged (long voyages), then plateau
+const rGap=[0,9,13,13,13,12.5,12,12,11.5,11,10,9,8,7,6,5.5,5,5];           // supply removed — steep, eases June
+function cumR(rate,total){let c=[0],s=0;for(let i=1;i<N;i++){s+=(rate[i]+rate[i-1])/2*(WD[i]-WD[i-1]);c.push(s);}const k=total/s;return c.map(v=>v*k);}
+const gapC=cumR(rGap,1200),demC=cumR(rDem,472),drwC=cumR(rRes,495),atlC=cumR(rAtl,410);
+// helpers on the WD day-index
+const xs=(d,L,W,R)=>L+d/118*(W-L-R);
+const lp=(a,L,W,R,yf)=>a.map((v,i)=>`${i?'L':'M'}${xs(WD[i],L,W,R).toFixed(1)} ${yf(v).toFixed(1)}`).join(" ");
+const ap=(a,L,W,R,yf,y0)=>lp(a,L,W,R,yf)+` L${xs(118,L,W,R).toFixed(1)} ${y0} L${xs(0,L,W,R).toFixed(1)} ${y0} Z`;
+function band(lo,hi,L,W,R,yf){let p=hi.map((v,i)=>`${i?'L':'M'}${xs(WD[i],L,W,R).toFixed(1)} ${yf(v).toFixed(1)}`).join(" ");for(let i=N-1;i>=0;i--)p+=` L${xs(WD[i],L,W,R).toFixed(1)} ${yf(lo[i]).toFixed(1)}`;return p+" Z";}
 function months(svg,L,W,R,H){[[0,"28 Feb"],[32,"Apr"],[62,"May"],[93,"Jun"],[118,"26 Jun"]].forEach(([d,l])=>svg.insertAdjacentHTML("beforeend",`<text x="${xs(d,L,W,R)}" y="${H-8}" text-anchor="middle" font-size="11">${l}</text>`));}
-function ygrid(svg,L,W,R,yf,vals){vals.forEach(g=>svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yf(g)}" x2="${W-R}" y2="${yf(g)}" stroke="#1b2d3c"/><text x="${L-6}" y="${yf(g)+3}" text-anchor="end" font-size="10">${g}</text>`));}
+function ygrid(svg,L,W,R,yf,vals,suf){vals.forEach(g=>svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yf(g)}" x2="${W-R}" y2="${yf(g)}" stroke="#1b2d3c"/><text x="${L-6}" y="${yf(g)+3}" text-anchor="end" font-size="10">${g}${suf||""}</text>`));}
+function evt(svg,day,lab,L,W,R,T,H,B){const x=xs(day,L,W,R);svg.insertAdjacentHTML("beforeend",`<line x1="${x}" y1="${T+6}" x2="${x}" y2="${H-B}" stroke="#7d97a6" stroke-dasharray="3 3"/><text x="${x}" y="${T+2}" text-anchor="middle" font-size="9.5" fill="#aebecb">${lab}</text>`);}
+const LEG=(svg,W,R,items)=>items.forEach((d,i)=>svg.insertAdjacentHTML("beforeend",`<rect x="${W-R+8}" y="${44+i*22}" width="12" height="12" fill="${d[1]}aa"/><text x="${W-R+25}" y="${54+i*22}" font-size="11" fill="#eaf1f6">${d[0]}</text>`));
 
 // 1 · cumulative loss
 (function(){const svg=document.getElementById("cumloss"),W=900,H=260,L=46,R=24,T=18,B=32,yMax=1300,yf=v=>T+(1-v/yMax)*(H-T-B);
  ygrid(svg,L,W,R,yf,[0,300,600,900,1200]);
- svg.insertAdjacentHTML("beforeend",`<path d="${apath(gap,L,W,R,yf,yf(0))}" fill="#e7584c2e"/><path d="${lpath(gap,L,W,R,yf)}" fill="none" stroke="#e7584c" stroke-width="2.5"/>`);
- svg.insertAdjacentHTML("beforeend",`<text x="${W-R}" y="${yf(gap[DAYS])-8}" text-anchor="end" fill="#ff9d92" font-size="12" font-weight="bold">~1,200 mb removed</text><text x="${L}" y="12" font-size="11" fill="#93a8b6">million barrels, cumulative</text>`);
+ svg.insertAdjacentHTML("beforeend",`<path d="${ap(gapC,L,W,R,yf,yf(0))}" fill="#e7584c2e"/><path d="${lp(gapC,L,W,R,yf)}" fill="none" stroke="#e7584c" stroke-width="2.5"/>`);
+ svg.insertAdjacentHTML("beforeend",`<text x="${W-R}" y="${yf(gapC[N-1])-8}" text-anchor="end" fill="#ff9d92" font-size="12" font-weight="bold">~1,200 mb removed</text><text x="${L}" y="12" font-size="11" fill="#93a8b6">million barrels, cumulative</text>`);
  months(svg,L,W,R,H);})();
 
-// 2 · cumulative compensation (stacked) vs gap line
+// 2 · run-rate (the dynamic) — stacked mb/d with event markers
+(function(){const svg=document.getElementById("runrate"),W=900,H=250,L=46,R=132,T=26,B=32,yMax=18,yf=v=>T+(1-v/yMax)*(H-T-B);
+ ygrid(svg,L,W,R,yf,[0,5,10,15]," mb/d");
+ const z=rDem.map(()=>0),s2=rDem.map((v,i)=>v+rRes[i]),s3=s2.map((v,i)=>v+rAtl[i]);
+ svg.insertAdjacentHTML("beforeend",`<path d="${band(z,rDem,L,W,R,yf)}" fill="#f3a73866"/><path d="${band(rDem,s2,L,W,R,yf)}" fill="#e7584c66"/><path d="${band(s2,s3,L,W,R,yf)}" fill="#3fbecb66"/>`);
+ evt(svg,11,"IEA 400mb release",L,W,R,T,H,B); evt(svg,28,"Atlantic cargoes land",L,W,R,T,H,B); evt(svg,110,"ceasefire",L,W,R,T,H,B);
+ LEG(svg,W,R,[["Demand destroyed","#f3a738"],["Reserve draws","#e7584c"],["Atlantic reroute","#3fbecb"]]);
+ svg.insertAdjacentHTML("beforeend",`<text x="${L}" y="14" font-size="11" fill="#93a8b6">offset run-rate, mb/d</text>`);
+ months(svg,L,W,R,H);})();
+
+// 3 · cumulative compensation (stacked) vs gap line
 (function(){const svg=document.getElementById("cumcomp"),W=900,H=280,L=46,R=132,T=18,B=32,yMax=1500,yf=v=>T+(1-v/yMax)*(H-T-B);
  ygrid(svg,L,W,R,yf,[0,400,800,1200]);
- const z=demand.map(()=>0),l2=demand.map((v,i)=>v+draw[i]),l3=l2.map((v,i)=>v+atl[i]);
- svg.insertAdjacentHTML("beforeend",`<path d="${band(z,demand,L,W,R,yf)}" fill="#f3a73866"/><path d="${band(demand,l2,L,W,R,yf)}" fill="#e7584c66"/><path d="${band(l2,l3,L,W,R,yf)}" fill="#3fbecb66"/>`);
- svg.insertAdjacentHTML("beforeend",`<path d="${lpath(gap,L,W,R,yf)}" fill="none" stroke="#eaf1f6" stroke-width="2" stroke-dasharray="5 4"/>`);
- const leg=[["Demand destroyed","#f3a738","472"],["Reserve draws","#e7584c","495"],["Atlantic reroute","#3fbecb","410"]];
- leg.forEach((d,i)=>svg.insertAdjacentHTML("beforeend",`<rect x="${W-R+8}" y="${44+i*24}" width="12" height="12" fill="${d[1]}aa"/><text x="${W-R+25}" y="${54+i*24}" font-size="11" fill="#eaf1f6">${d[0]} (${d[2]})</text>`));
- svg.insertAdjacentHTML("beforeend",`<line x1="${W-R+8}" y1="${44+3*24+6}" x2="${W-R+20}" y2="${44+3*24+6}" stroke="#eaf1f6" stroke-width="2" stroke-dasharray="4 3"/><text x="${W-R+25}" y="${44+3*24+10}" font-size="11" fill="#eaf1f6">The hole (~1,200)</text><text x="${L}" y="12" font-size="11" fill="#93a8b6">million barrels, cumulative</text>`);
+ const z=demC.map(()=>0),l2=demC.map((v,i)=>v+drwC[i]),l3=l2.map((v,i)=>v+atlC[i]);
+ svg.insertAdjacentHTML("beforeend",`<path d="${band(z,demC,L,W,R,yf)}" fill="#f3a73866"/><path d="${band(demC,l2,L,W,R,yf)}" fill="#e7584c66"/><path d="${band(l2,l3,L,W,R,yf)}" fill="#3fbecb66"/>`);
+ svg.insertAdjacentHTML("beforeend",`<path d="${lp(gapC,L,W,R,yf)}" fill="none" stroke="#eaf1f6" stroke-width="2" stroke-dasharray="5 4"/>`);
+ LEG(svg,W,R,[["Demand destroyed (472)","#f3a738"],["Reserve draws (495)","#e7584c"],["Atlantic reroute (410)","#3fbecb"]]);
+ svg.insertAdjacentHTML("beforeend",`<line x1="${W-R+8}" y1="${44+3*22+6}" x2="${W-R+20}" y2="${44+3*22+6}" stroke="#eaf1f6" stroke-width="2" stroke-dasharray="4 3"/><text x="${W-R+25}" y="${44+3*22+10}" font-size="11" fill="#eaf1f6">The hole (~1,200)</text><text x="${L}" y="12" font-size="11" fill="#93a8b6">million barrels, cumulative</text>`);
  months(svg,L,W,R,H);})();
 
-// SPR 50-year history
-(function(){const svg=document.getElementById("sprhist"),W=900,H=280,L=46,R=22,T=22,B=32;
+// SPR 50-year history (rescoped for grid2)
+(function(){const svg=document.getElementById("sprhist"),W=470,H=270,L=40,R=18,T=22,B=30;
  const d=[[1977,7],[1980,92],[1983,331],[1985,490],[1990,586],[1995,592],[2000,541],[2005,685],[2009,727],[2012,695],[2015,691],[2018,660],[2020,638],[2022,372],[2023,347],[2024,390],[2025,411],[2026,331]];
  const x0=1977,x1=2026,xf=y=>L+(y-x0)/(x1-x0)*(W-L-R),yMax=800,yf=v=>T+(1-v/yMax)*(H-T-B);
- [0,200,400,600,800].forEach(g=>svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yf(g)}" x2="${W-R}" y2="${yf(g)}" stroke="#1b2d3c"/><text x="${L-6}" y="${yf(g)+3}" text-anchor="end" font-size="10">${g}</text>`));
- [1980,1990,2000,2010,2020].forEach(yr=>svg.insertAdjacentHTML("beforeend",`<text x="${xf(yr)}" y="${H-8}" text-anchor="middle" font-size="11">${yr}</text>`));
+ [0,400,800].forEach(g=>svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yf(g)}" x2="${W-R}" y2="${yf(g)}" stroke="#1b2d3c"/><text x="${L-6}" y="${yf(g)+3}" text-anchor="end" font-size="10">${g}</text>`));
+ [1980,2000,2020].forEach(yr=>svg.insertAdjacentHTML("beforeend",`<text x="${xf(yr)}" y="${H-8}" text-anchor="middle" font-size="11">${yr}</text>`));
  svg.insertAdjacentHTML("beforeend",`<line x1="${xf(1983)}" y1="${yf(331)}" x2="${xf(2026)}" y2="${yf(331)}" stroke="#f3a738" stroke-dasharray="5 4" stroke-width="1.5"/>`);
  svg.insertAdjacentHTML("beforeend",`<path d="${d.map((p,i)=>`${i?'L':'M'}${xf(p[0]).toFixed(1)} ${yf(p[1]).toFixed(1)}`).join(" ")}" fill="none" stroke="#3fbecb" stroke-width="2.5"/>`);
- d.forEach(p=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xf(p[0])}" cy="${yf(p[1])}" r="2.6" fill="#3fbecb"/>`));
- svg.insertAdjacentHTML("beforeend",`<text x="${xf(2009)}" y="${yf(727)-8}" text-anchor="middle" font-size="11" fill="#7fe2b3">peak 727 (2009)</text>`);
+ d.forEach(p=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xf(p[0])}" cy="${yf(p[1])}" r="2.4" fill="#3fbecb"/>`));
+ svg.insertAdjacentHTML("beforeend",`<text x="${xf(2007)}" y="${yf(727)-7}" text-anchor="middle" font-size="10.5" fill="#7fe2b3">peak 727</text>`);
  svg.insertAdjacentHTML("beforeend",`<text x="${xf(2026)}" y="${yf(331)-9}" text-anchor="end" font-size="11" fill="#ff9d92" font-weight="bold">331 now</text>`);
- svg.insertAdjacentHTML("beforeend",`<text x="${xf(1983)}" y="${yf(331)+16}" text-anchor="middle" font-size="11" fill="#f3a738">1983</text>`);
- svg.insertAdjacentHTML("beforeend",`<text x="${L}" y="12" font-size="11" fill="#93a8b6">US Strategic Petroleum Reserve, million barrels</text>`);})();
+ svg.insertAdjacentHTML("beforeend",`<text x="${xf(1983)}" y="${yf(331)+16}" text-anchor="middle" font-size="10.5" fill="#f3a738">1983</text>`);})();
+
+// Brent across the war
+(function(){const svg=document.getElementById("brentwar"),W=470,H=270,L=42,R=18,T=22,B=30;
+ const bw=[[0,72],[10,120],[25,105],[39,94],[53,88],[67,84],[81,81],[95,79],[112,80],[118,74]];
+ const yMin=60,yMax=130,xf=d=>L+d/118*(W-L-R),yf=v=>T+(1-(v-yMin)/(yMax-yMin))*(H-T-B);
+ [60,80,100,120].forEach(g=>svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yf(g)}" x2="${W-R}" y2="${yf(g)}" stroke="#1b2d3c"/><text x="${L-6}" y="${yf(g)+3}" text-anchor="end" font-size="10">$${g}</text>`));
+ [[0,"Feb"],[32,"Apr"],[62,"May"],[93,"Jun"]].forEach(([d,l])=>svg.insertAdjacentHTML("beforeend",`<text x="${xf(d)}" y="${H-8}" text-anchor="middle" font-size="11">${l}</text>`));
+ svg.insertAdjacentHTML("beforeend",`<path d="${bw.map((p,i)=>`${i?'L':'M'}${xf(p[0]).toFixed(1)} ${yf(p[1]).toFixed(1)}`).join(" ")}" fill="none" stroke="#f3a738" stroke-width="2.5"/>`);
+ bw.forEach(p=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xf(p[0])}" cy="${yf(p[1])}" r="2.6" fill="#f3a738"/>`));
+ svg.insertAdjacentHTML("beforeend",`<text x="${xf(10)}" y="${yf(120)-7}" text-anchor="middle" font-size="11" fill="#ff9d92" font-weight="bold">$120 peak</text><text x="${xf(0)+4}" y="${yf(72)+14}" font-size="10.5" fill="#93a8b6">$72 pre-war</text><text x="${W-R}" y="${yf(74)+15}" text-anchor="end" font-size="11" fill="#7fe2b3">$74 now</text>`);})();
 
 // sourcing (Q2) — smaller viewBox
 (function(){const svg=document.getElementById("sourcing"),W=460,max=410,top=4,rowH=40,labelW=150;
