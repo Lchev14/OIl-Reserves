@@ -1,0 +1,22 @@
+{
+  "note": "Prioritised tank-farm areas of interest. Allocate satellite effort to DATA-DARK sites (China, Gulf, non-OECD), not where IEA/EIA already publish. Coordinates are approximate facility centroids; refine per-tank before production. Tier-A = build first (highest information value).",
+  "aois": [
+    {"tier": "A", "id": "cn-zhoushan",   "name": "Zhoushan (China commercial/SPR)", "lat": 29.95,  "lon": 122.07, "kind": "import-storage"},
+    {"tier": "A", "id": "cn-dalian",     "name": "Dalian (China)",                   "lat": 38.95,  "lon": 121.65, "kind": "import-storage"},
+    {"tier": "A", "id": "cn-rizhao",     "name": "Rizhao (China)",                   "lat": 35.39,  "lon": 119.53, "kind": "import-storage"},
+    {"tier": "A", "id": "cn-huizhou",    "name": "Huizhou (China)",                  "lat": 22.70,  "lon": 114.50, "kind": "import-storage"},
+    {"tier": "A", "id": "sa-rastanura",  "name": "Ras Tanura (Saudi export)",        "lat": 26.64,  "lon": 50.16,  "kind": "export-terminal"},
+    {"tier": "A", "id": "sa-juaymah",    "name": "Ju'aymah (Saudi export)",          "lat": 26.88,  "lon": 49.95,  "kind": "export-terminal"},
+    {"tier": "A", "id": "sa-yanbu",      "name": "Yanbu (Saudi Red Sea / bypass)",   "lat": 24.06,  "lon": 38.06,  "kind": "export-terminal"},
+    {"tier": "A", "id": "ae-fujairah",   "name": "Fujairah (UAE, outside Hormuz)",   "lat": 25.16,  "lon": 56.35,  "kind": "export-terminal"},
+    {"tier": "A", "id": "ir-kharg",      "name": "Kharg Island (Iran export)",       "lat": 29.23,  "lon": 50.32,  "kind": "export-terminal"},
+    {"tier": "A", "id": "iq-fao",        "name": "Fao/Basrah (Iraq export)",         "lat": 29.97,  "lon": 48.47,  "kind": "export-terminal"},
+    {"tier": "A", "id": "ru-primorsk",   "name": "Primorsk (Russia Baltic export)",  "lat": 60.00,  "lon": 28.70,  "kind": "export-terminal"},
+    {"tier": "B", "id": "in-jamnagar",   "name": "Jamnagar (India)",                 "lat": 22.35,  "lon": 69.85,  "kind": "refinery-storage"},
+    {"tier": "B", "id": "ae-jebelali",   "name": "Jebel Ali (UAE)",                  "lat": 25.00,  "lon": 55.06,  "kind": "import-storage"},
+    {"tier": "B", "id": "sg-jurong",     "name": "Jurong (Singapore hub)",           "lat": 1.27,   "lon": 103.70, "kind": "trading-hub"},
+    {"tier": "B", "id": "za-saldanha",   "name": "Saldanha Bay (South Africa)",      "lat": -33.02, "lon": 17.95,  "kind": "strategic-storage"},
+    {"tier": "C", "id": "nl-rotterdam",  "name": "Rotterdam/Europoort (ARA hub)",    "lat": 51.95,  "lon": 4.05,   "kind": "transparent-audit"},
+    {"tier": "C", "id": "us-cushing",    "name": "Cushing, OK (WTI hub)",            "lat": 35.97,  "lon": -96.77, "kind": "transparent-audit"}
+  ]
+}

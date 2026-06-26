@@ -3,6 +3,8 @@
 build
 docs
 workflows
+satellite
 *.md
 *.xlsx
 *.py
+*.json
