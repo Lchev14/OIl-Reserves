@@ -212,14 +212,10 @@ for i,(w,o,s,m) in enumerate(tj,start=2):
     ws.cell(i,1,w).alignment=CEN; ws.cell(i,2,o).alignment=CEN; ws.cell(i,3,s).alignment=CEN; ws.cell(i,4,m).alignment=LEFT
     for c in range(1,5): ws.cell(i,c).border=BORDER
 ws.freeze_panes="A2"; autosize(ws,[10,16,13,42])
-# native Excel line chart (lives in the file)
-from openpyxl.chart import LineChart, Reference
-chart=LineChart(); chart.title="Stock trajectory Feb->Jun 2026 (inflection: NOT yet turned)"
-chart.style=2; chart.height=8; chart.width=18
-data=Reference(ws,min_col=2,max_col=3,min_row=1,max_row=9)
-cats=Reference(ws,min_col=1,min_row=2,max_row=9)
-chart.add_data(data,titles_from_data=True); chart.set_categories(cats)
-ws.add_chart(chart,"F2")
+ws.cell(11,1,"Inflection: NOT yet turned — OECD and US SPR both fall every print through 26 Jun.").font=Font(italic=True,color="9E2B25")
+# (Native chart intentionally omitted: openpyxl's chart XML triggers Excel's
+#  "recover content" prompt. The trajectory is plotted on the dashboard instead;
+#  select A1:C9 and Insert > Line if you want an in-sheet chart.)
 
 # ============================================================ SCENARIOS =====
 ws = wb.create_sheet("Scenarios")
