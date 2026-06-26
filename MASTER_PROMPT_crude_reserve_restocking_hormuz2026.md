@@ -315,12 +315,33 @@ Re-pull classes: IEA.org (OMR Mar–Jun, Hormuz Factsheet, Chokepoints Monitor),
 
 ---
 
-## 11 — DIY SATELLITE TANK-TOP PIPELINE (separate lc-build project; spec only)
+## 11 — SATELLITE TANK-TOP PIPELINE (separate lc-build project; spec only)
 
-For ground-truth where official data hides (China SPR, Gulf terminals), the floating-roof-shadow technique is buildable from free imagery. **This is a separate project, not part of the run above** — flagged because the operator asked.
+**This is a separate project, not part of the run above.** Expanded from a China/Gulf-only target to a global ~80%-of-visible-stock footprint — *but with an explicit materiality correction* (read §11.0 first, it changes the allocation).
 
-- **Imagery:** Copernicus **Sentinel-1 SAR** (all-weather, day/night; floating-roof returns a distinctive signature) + **Sentinel-2 optical** (shadow-length method on clear days). Both free, EU-owned, ~6–12 day revisit; fuse for cadence.
-- **Targets:** prioritized AOIs — Chinese commercial/SPR farms (Zhoushan, Dalian, Huizhou), Gulf terminals (Ras Tanura, Fujairah, Kharg), Saudi Red Sea (Yanbu), key OECD hubs (Cushing, ARA).
-- **Method:** (1) tank-farm AOI catalogue; (2) per-tank floating-roof detection; (3) volume proxy — optical shadow length × sun-elevation geometry → roof height → fill %; SAR backscatter/ring detection as the all-weather proxy; (4) calibrate against published Kayrros/Ursa/Orbital figures to fit the fill-curve; (5) aggregate to regional weekly stock-change, with error bars.
-- **Stack:** Sentinel via Copernicus Data Space / Google Earth Engine; Python (rasterio, sentinelhub, scikit-image / a small CV model); validation harness vs published provider numbers.
-- **Honest limits:** fixed-roof and underground tanks defeat the shadow method (SAR partly mitigates); calibration without ground truth is the hard part; treat output as `Modelled-EST` Tier-3 proxy, never `Verified`. Scope as its own repo before committing effort.
+### 11.0 — Why "cover 80% of global stock with satellite" is the wrong objective
+Satellite tank-top is expensive effort. Spending it where **free official data already exists is waste**. The value is strictly at **data-dark sites**. So allocate by *information gap*, not by stock share:
+- **OECD importers (US, Japan, Korea, Germany, ARA/NL, Italy, Spain, UK, France, Poland):** IEA OMR + EIA weekly + Euroilstock already publish stocks. Satellite adds ~nothing → **skip** (use official; satellite only as an audit cross-check).
+- **China + non-OECD Asia (India partial, Thailand, Indonesia, Vietnam):** opaque, third-party-estimate only → **highest marginal value**.
+- **Gulf + other producer export terminals (Saudi, UAE, Iraq, Iran, Kuwait, Qatar; plus Russia, Nigeria, Venezuela):** terminal stocks unreported → **high value**.
+This is why the v1 spec named China + Gulf: not because they are the biggest, but because they are the **darkest**. The 80%-of-stock target is achievable for the *visible above-ground* layer (see 11.2), but the *decision-relevant* coverage is the ~30–40% of global stock that nobody publishes.
+
+### 11.1 — Materiality by tank type (what the method physically can and cannot see)
+- **Floating-roof tanks → YES.** The roof rises/falls with volume; optical shadow-length + sun geometry → fill %, and SAR sees the roof-position ring. **Most commercial crude storage worldwide is floating-roof** (ARA, Cushing, US Gulf, Chinese coastal farms, Singapore, Gulf export terminals). This is the workable universe.
+- **Fixed-roof tanks → NO direct fill (SAR gives weak proxies only).** Common for products, some Asian storage.
+- **Underground / salt-cavern / rock-cavern → INVISIBLE to any overhead method.** Two load-bearing cases:
+  - **US SPR is in salt caverns** (Bryan Mound, Big Hill, West Hackberry, Bayou Choctaw) — *cannot* be seen from orbit. (Moot: EIA publishes it weekly.)
+  - **Part of China's SPR is in underground/rock caverns** (e.g. Huangdao) — invisible. But much of China's commercial + SPR is **above-ground floating-roof** (Zhoushan, Dalian, Rizhao, Huizhou) → visible. This is the single highest-value satellite target on Earth.
+- **Best-fit where tanks are invisible:** **tanker-flow mass-balance** — implied stock change = imports − refinery runs − exports (Kpler/Vortexa + JODI/customs), the same logic the Tier-5 estimator uses. Satellite covers the above-ground layer; mass-balance covers the buried layer; together they bound the total.
+
+### 11.2 — Global AOI catalogue (~80% of *visible* crude storage)
+Prioritised tiers (build China+Gulf first; they carry the information value):
+- **Tier-A (data-dark, build first):** China (Zhoushan, Dalian, Rizhao, Huizhou, Ningbo, Lanzhou); Gulf export terminals (Ras Tanura, Ju'aymah, Yanbu, Fujairah, Jebel Ali, Kharg, Basrah/Fao, Mesaieed); Russia (Primorsk, Ust-Luga, Novorossiysk); Nigeria (Bonny), Venezuela (José).
+- **Tier-B (semi-transparent):** India (Jamnagar, Mangalore, Vizag SPR), Singapore (Jurong), Fujairah commercial, South Africa (Saldanha Bay), Malaysia (Pengerang).
+- **Tier-C (transparent — audit cross-check only):** ARA (Rotterdam/Amsterdam/Antwerp), US (Cushing, Houston, LOOP/Clovelly), Caribbean (St Eustatius, Bahamas).
+
+### 11.3 — Pipeline
+- **Imagery:** Copernicus **Sentinel-1 SAR** (all-weather, day/night; floating-roof ring signature) + **Sentinel-2 optical** (shadow-length on clear days); free, EU-owned, ~6–12 day revisit; fuse for cadence. Add **commercial high-res (Planet/Umbra/ICEYE)** only for Tier-A sites needing tighter revisit.
+- **Method:** (1) per-site tank-farm AOI catalogue + per-tank polygons; (2) floating-roof detection & classification (drop fixed-roof/cavern sites to the mass-balance track); (3) fill proxy — optical shadow length × sun-elevation → roof height → %full; SAR backscatter/ring as the all-weather proxy; (4) calibrate the fill-curve against published Kayrros/Ursa/Orbital figures; (5) aggregate to regional weekly stock-change with error bars; (6) **fuse with tanker-flow mass-balance** for buried-capacity sites and total reconciliation.
+- **Stack:** Copernicus Data Space / Google Earth Engine; Python (rasterio, sentinelhub, scikit-image, a small CV/segmentation model); validation harness vs published provider numbers; output tagged `Modelled-EST` Tier-3 proxy, **never `Verified`**.
+- **Honest limits:** fixed-roof/cavern defeats the optical method (SAR only partial); calibration without ground truth is the hard part; cloud cover gates optical (SAR mitigates); revisit ≠ daily. Scope as its own repo. Realistic effort: a focused China-only floating-roof MVP is a few-week build; the full global Tier-A/B catalogue is a multi-month project — sequence it.
