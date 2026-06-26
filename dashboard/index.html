@@ -102,6 +102,17 @@
   .terms b{color:var(--dim)}
   .foot{margin-top:42px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--faint);line-height:1.6}
   a{color:var(--cyan)}
+  /* confidence tiers */
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;flex:none}
+  .dot-v{background:#34b87a}.dot-w{background:#f3a738}.dot-m{background:#e7584c}.dot-n{background:#46586a}
+  .prov{background:#14110a;border:1px solid #4a3a16;border-left:3px solid var(--amber);border-radius:10px;padding:15px 18px;margin:18px 0 6px}
+  .prov .h{font-weight:700;font-size:13.5px;color:#f3c987;margin-bottom:6px}
+  .prov p{margin:0 0 10px;font-size:13px;color:#cbb892;max-width:920px}
+  .prov p b{color:#ffe1ad}
+  .provleg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:12px;color:var(--dim)}
+  @media(max-width:760px){.provleg{grid-template-columns:1fr}}
+  .provleg span b{color:var(--txt)}
+  .provleg > span{display:flex;align-items:flex-start;gap:2px}
 </style>
 </head>
 <body>
@@ -112,7 +123,7 @@
       <a href="#indicators">Indicators</a><a href="#depletion">Depletion</a><a href="#context">50-yr context</a><a href="#exposed">Exposure</a>
       <a href="#ledger">Where it went</a><a href="#restock">Restocking</a><a href="#price">Forecasts</a><a href="#scenarios">Scenarios</a>
     </nav>
-    <span class="meta">as of 26 Jun 2026 · 118 days into the war · figures wire-attributed where IEA/EIA portals were unreachable (see foot)</span>
+    <span class="meta">as of 26 Jun 2026 · 118 days into the war · ESTIMATE — no figure pulled from a verified primary source in-build (see “how much to trust these numbers” below)</span>
   </div>
 </header>
 
@@ -139,18 +150,29 @@
     </div>
   </div>
 
+  <!-- PROVENANCE / HONESTY BANNER -->
+  <div class="prov">
+    <div class="h">How much to trust these numbers — read this first</div>
+    <p>This was built <b>after the analyst's knowledge cutoff</b>, and the authoritative data portals (IEA, EIA) were <b>unreachable during the build</b> — so <b>no figure here was pulled from a verified primary source in-session.</b> The <b>directional conclusions are robust</b> (reserves drained not redistributed; Europe drew down while Asia held; refilling is throughput-limited). The <b>exact numbers are estimates</b> — every value carries one of three confidence levels:</p>
+    <div class="provleg">
+      <span><span class="dot dot-v"></span><span><b>Verified</b> — corroborated across several wire reports (Brent, US SPR, Hormuz flow, IEA release, the SPR 50-yr shape, pipeline capacities)</span></span>
+      <span><span class="dot dot-w"></span><span><b>Wire-estimated</b> — attributed to agencies/news but not pulled from the primary (most country reserve-days)</span></span>
+      <span><span class="dot dot-m"></span><span><b>Modelled</b> — derived/inferred (the ledger &amp; ρ, every day-by-day curve, estimated baselines, producer detail)</span></span>
+    </div>
+  </div>
+
   <!-- KEY INDICATORS (scope b) -->
   <h2 id="indicators">Where the market stands today</h2>
-  <p class="sub">Eight numbers framing the situation, each against its pre-war level.</p>
+  <p class="sub">Eight numbers framing the situation, each against its pre-war level. Dot = confidence (green verified · amber wire-estimated · red modelled).</p>
   <div class="kpis">
-    <div class="kpi"><div class="lab">Oil price (Brent crude)</div><div class="v">$74<small>/bbl</small></div><div class="ex">≈ pre-war ($72). Spiked to $120 in Mar; war premium gone.</div></div>
-    <div class="kpi"><div class="lab">Oil through the Strait of Hormuz</div><div class="v fl">4.8<small>/15 mb/d</small></div><div class="ex">A third of normal flow. Reopening, still the bottleneck.</div></div>
-    <div class="kpi"><div class="lab">US Strategic Petroleum Reserve</div><div class="v dn">331<small> mb</small></div><div class="ex">−80 mb (−19%) since Dec; lowest since 1983.</div></div>
-    <div class="kpi"><div class="lab">Emergency reserves released (IEA)</div><div class="v">400<small> mb</small></div><div class="ex">Largest coordinated release ever; ~46% drawn so far.</div></div>
-    <div class="kpi"><div class="lab">Reserves drawn down worldwide</div><div class="v dn">≈615<small> mb</small></div><div class="ex">Pulled from stockpiles to replace blocked Gulf supply.</div></div>
-    <div class="kpi"><div class="lab">Oil never produced (wells shut in)</div><div class="v dn">≈700–1,080<small> mb</small></div><div class="ex">Gulf output stopped — nowhere to store or ship it.</div></div>
-    <div class="kpi"><div class="lab">Tanker freight (Gulf→Asia, VLCC)</div><div class="v dn">$180k<small>/day</small></div><div class="ex">Still &gt;3× the ~$55k pre-war rate.</div></div>
-    <div class="kpi"><div class="lab">Earliest reserves can refill</div><div class="v">Q4 2026</div><div class="ex">Not until the Strait normalises and demand recovers.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-v"></span>Oil price (Brent crude)</div><div class="v">$74<small>/bbl</small></div><div class="ex">≈ pre-war ($72). Spiked to $120 in Mar; war premium gone.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-v"></span>Oil through the Strait of Hormuz</div><div class="v fl">~4.8<small>/15 mb/d</small></div><div class="ex">A third of normal flow. Reopening, still the bottleneck.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-v"></span>US Strategic Petroleum Reserve</div><div class="v dn">331<small> mb</small></div><div class="ex">−80 mb (−19%) since Dec; lowest since 1983.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-v"></span>Emergency reserves released (IEA)</div><div class="v">400<small> mb</small></div><div class="ex">Largest coordinated release ever; ~46% drawn so far.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-m"></span>Reserves drawn down worldwide</div><div class="v dn">≈615<small> mb</small></div><div class="ex">Modelled from aggregate stock-draw reports.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-m"></span>Oil never produced (wells shut in)</div><div class="v dn">≈700–1,080<small> mb</small></div><div class="ex">Modelled range; Gulf output stopped — nowhere to store it.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-w"></span>Tanker freight (Gulf→Asia, VLCC)</div><div class="v dn">~$180k<small>/day</small></div><div class="ex">Still &gt;3× the ~$55k pre-war rate.</div></div>
+    <div class="kpi"><div class="lab"><span class="dot dot-m"></span>Earliest reserves can refill</div><div class="v">Q4 2026</div><div class="ex">Modelled — not until the Strait normalises &amp; demand recovers.</div></div>
   </div>
 
   <!-- DEPLETION before->today (scope a + restock q1) -->
@@ -312,6 +334,11 @@
 
 <script>
 // ---- data ----
+// confidence tier per country: w=wire-estimated, m=modelled, n=n/a (net exporter/absent)
+const TIER={France:"w",UK:"w",Italy:"w",Japan:"w","South Korea":"w",China:"w",India:"w",
+  Thailand:"w",Philippines:"w",Indonesia:"w",Vietnam:"w",Germany:"m",Spain:"m",Poland:"m",
+  USA:"n",Netherlands:"n"};
+const DOT=t=>`<span class="dot dot-${t||'w'}"></span>`;
 // b = Dec-2025 baseline (null if none); est = estimated baseline; note for net exporters
 const beforeToday=[
  {c:"Spain",b:120,t:91},
@@ -350,17 +377,17 @@ const producer=[
  {c:"Qatar",dep:0,tot:10.5,full:.92,shut:0.95,bypass:"No"},
 ];
 
-// ---- before->today table (all 16) ----
+// ---- before->today table (all 16) — rounded (no false precision) ----
 const dt=document.querySelector("#dtab tbody"), MO=30.44, dash=`<td class="n" style="color:var(--faint)">–</td>`;
 const mo=v=>v==null?dash:`<td class="n">${(v/MO).toFixed(1)}</td>`;
 beforeToday.forEach(r=>{
-  const both=r.b!=null&&r.t!=null, d=both?r.t-r.b:null;
+  const both=r.b!=null&&r.t!=null, d=both?Math.round(r.t)-Math.round(r.b):null;
   const cls=d==null?"":d<-2?"chg-dn":d>2?"chg-up":"chg-fl", sign=d>0?"+":"";
-  const bCell=r.b==null?dash:`<td class="n">${r.b}${r.est?'<span style="color:var(--faint)">*</span>':''}</td>`;
-  const tCell=r.t==null?dash:`<td class="n">${r.t}</td>`;
+  const bCell=r.b==null?dash:`<td class="n">~${Math.round(r.b)}${r.est?'<span style="color:var(--faint)">*</span>':''}</td>`;
+  const tCell=r.t==null?dash:`<td class="n">~${Math.round(r.t)}</td>`;
   const chg=r.note?`<td class="n" style="color:var(--faint)">${r.note}</td>`
-            :d==null?dash:`<td class="n ${cls}">${sign}${d.toFixed(1)} d</td>`;
-  dt.insertAdjacentHTML("beforeend",`<tr><td>${r.c}</td>${bCell}${mo(r.b)}${tCell}${mo(r.t)}${chg}</tr>`);
+            :d==null?dash:`<td class="n ${cls}">${sign}${d} d</td>`;
+  dt.insertAdjacentHTML("beforeend",`<tr><td>${DOT(TIER[r.c])}${r.c}</td>${bCell}${mo(r.b)}${tCell}${mo(r.t)}${chg}</tr>`);
 });
 
 // ---- exposure table ----
@@ -371,18 +398,18 @@ consumer.slice().sort((a,b)=>b.dep-a.dep).forEach(r=>{
   const [pc,pl]=expClass(r.dep);
   const cover=r.cover==null?`<span style="color:var(--faint)">– n/a</span>`:
     `<div class="barwrap"><div class="track"><div class="fill" style="width:${Math.min(100,r.cover/maxCover*100)}%;background:#2f6f8a"></div></div><span class="lab">${r.cover} d</span></div>`;
-  tb.insertAdjacentHTML("beforeend",`<tr><td>${r.c}</td><td>${cover}</td>
-   <td><div class="barwrap"><div class="track"><div class="fill" style="width:${Math.round(r.dep*100)}%;background:${depColor(r.dep)}"></div></div><span class="lab">${Math.round(r.dep*100)}%</span></div></td>
+  tb.insertAdjacentHTML("beforeend",`<tr><td>${DOT(TIER[r.c])}${r.c}</td><td>${cover}</td>
+   <td><div class="barwrap"><div class="track"><div class="fill" style="width:${Math.round(r.dep*100)}%;background:${depColor(r.dep)}"></div></div><span class="lab">~${Math.round(r.dep*100)}%</span></div></td>
    <td><span class="pill ${pc}">${pl}</span></td></tr>`);
 });
 
-// ---- producer table ----
+// ---- producer table (all modelled/wire — Qatar weakest) ----
 const ptb=document.querySelector("#ptab tbody");
 producer.forEach(r=>{
-  const no=/^No|Barely/.test(r.bypass);
-  ptb.insertAdjacentHTML("beforeend",`<tr><td>${r.c}</td>
-   <td class="n"><b>${r.dep}</b> / ${r.tot} d</td><td class="n">${Math.round(r.full*100)}%</td>
-   <td class="n">${r.shut} mb/d</td><td style="color:${no?'#ff9d92':'#9fb4be'}">${r.bypass}</td></tr>`);
+  const no=/^No|Barely/.test(r.bypass), tier=r.c==="Qatar"?"m":"w";
+  ptb.insertAdjacentHTML("beforeend",`<tr><td>${DOT(tier)}${r.c}</td>
+   <td class="n"><b>~${r.dep}</b> / ~${r.tot} d</td><td class="n">~${Math.round(r.full*100)}%</td>
+   <td class="n">~${r.shut} mb/d</td><td style="color:${no?'#ff9d92':'#9fb4be'}">${r.bypass}</td></tr>`);
 });
 
 // ---- horizontal bars helper ----
