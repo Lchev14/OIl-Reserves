@@ -1,23 +1,21 @@
 # Deploying the dashboard (only the dashboard, nothing else)
 
-`dashboard/index.html` is a single dependency-free static file. Two guards ensure **only the dashboard is public**:
+The dashboard is `index.html` at the **repo root** — a single dependency-free static file. Vercel serves a root `index.html` at `/` with **zero configuration**. `.vercelignore` excludes everything else (`*.md`, `*.xlsx`, `*.py`, `build/`, `docs/`, `workflows/`), so only the dashboard is public.
 
-- **`.vercelignore`** (repo root) excludes `*.md`, `*.xlsx`, `*.py`, `build/`, `docs/`, `workflows/` from the Vercel build — so the workbook, reports, and workflow are never uploaded to Vercel.
-- **`vercel.json`** rewrites `/` → `/dashboard/index.html`, so the root URL shows the dashboard.
+No `vercel.json`, no rewrites, no `cleanUrls` — those caused the earlier root 404.
 
-Result: the deployed site serves the dashboard at `/`; everything else returns 404.
-
-## If you already imported the repo into Vercel
-You don't need to re-import. A push to the deployed branch auto-redeploys with these guards applied. To be belt-and-suspenders sure, also set the **Root Directory** to `dashboard` (Project → Settings → Build & Deployment → Root Directory → `dashboard` → Save → Redeploy). With Root Directory = `dashboard`, Vercel only ever sees `index.html`.
+## Fixing an existing Vercel project that 404s
+1. Vercel → your project → **Settings → Build & Deployment**.
+2. **Root Directory** must be **empty / blank** (the repo root). If it says `dashboard`, clear it — that folder no longer exists.
+3. **Framework Preset: Other**, no build command, default output.
+4. **Deployments** tab → **Redeploy** (or just push — it auto-redeploys).
 
 ## Verify only the dashboard is exposed
-After deploy, on your Vercel URL:
-- `https://<your-url>/` → dashboard renders ✓
-- `https://<your-url>/OUTPUT_hormuz2026_reserve_intelligence.xlsx` → **404** ✓
-- `https://<your-url>/README.md` → **404** ✓
-- `https://<your-url>/workflows/hormuz-reserve-intel.workflow.js` → **404** ✓
+On your Vercel URL:
+- `/` → dashboard renders ✓
+- `/README.md` → **404** ✓
+- `/OUTPUT_hormuz2026_reserve_intelligence.xlsx` → **404** ✓
+- `/workflows/hormuz-reserve-intel.workflow.js` → **404** ✓
 
-If any of those return a file instead of 404, the guards aren't applied — set Root Directory to `dashboard` and redeploy.
-
-## Cleanest alternative — deploy only the folder
-Download `dashboard/`, drag it onto **vercel.com/new**. Only `index.html` is uploaded; nothing else can leak by construction.
+## Foolproof alternative (no Git, no settings)
+Download `index.html`, go to **vercel.com/new**, drag the single file (or a folder containing only it) onto the page, Deploy. Only that file is uploaded — nothing else can leak.
