@@ -122,20 +122,20 @@
   <div class="hero">
     <div class="eyebrow">The question</div>
     <h1>Did the 2026 Hormuz war drain the world's oil reserves — or just shuffle them from buyers to sellers?</h1>
-    <p class="answer">It <b>drained</b> them. For every 100 barrels oil-buying countries pulled from their reserves, only about <b>20</b> piled up unsold on the producer side. The other <b>80</b> were used up or never pumped at all — and refilling is slow because the bottleneck is the Strait, not the oilfields.</p>
-    <p class="lede">When Iran closed the Strait of Hormuz on 28 Feb 2026, Gulf producers couldn't store the oil they could no longer ship — their tanks filled within two weeks, so they shut wells rather than stockpile. Importers drew down strategic reserves to cope. This page walks the full picture: how depleted reserves are, who's exposed, where the missing oil went, and what refilling will take.</p>
+    <p class="answer">It <b>drained</b> them — this was not a shuffle. Oil-buying countries pulled about <b>615 million barrels</b> out of their reserves, but oil-producing countries managed to restock only about <b>120 million</b> — roughly <b>1 barrel built up for every 5 drawn down</b>. The rest wasn't relocated to sellers' tanks; it was a genuine fall in the world's total reserves, covered by simply burning less oil and by long-haul shipments from the Atlantic.</p>
+    <p class="lede">Why so little ended up on the producer side: when Iran closed the Strait of Hormuz on 28 Feb 2026, Gulf producers couldn't ship their oil — and their storage tanks filled within two weeks. With nowhere to put it, they <b>shut their wells</b> instead of stockpiling. So the oil the world lost was mostly never produced, not parked in a tank somewhere. This page walks the full picture: how depleted reserves are, who's most exposed, where the missing oil went day by day, and what refilling will take.</p>
   </div>
 
   <div class="split">
-    <div class="cap">What happened to the oil the blockage took off the market — relocated, or lost?</div>
+    <div class="cap">Of the <b>~615 million barrels</b> buyers pulled from their reserves — how much did producers actually restock, and how much was a real loss to world reserves?</div>
     <div class="splitbar">
-      <div class="s20" title="~120 million barrels piled up on tankers and in Gulf storage behind the Strait.">~20% relocated</div>
-      <div class="s80" title="~615 mb drawn from consumer reserves + ~775 mb never produced.">~80% drawn from reserves or never produced</div>
+      <div class="s20" title="~120 mb that producers managed to stockpile (floating storage + Gulf tanks behind the Strait).">~20% restocked by producers</div>
+      <div class="s80" title="~495 mb net reduction in world reserves: consumed and backfilled by lower demand + Atlantic barrels, not relocated.">~80% a genuine fall in world reserves</div>
     </div>
     <div class="splitkey">
-      <span><b>Relocated</b> ≈ 120 mb stuck behind the Strait</span>
-      <span><b>Drawn down / lost</b> ≈ 615 mb from reserves + ~775 mb never pumped</span>
-      <span style="margin-left:auto;color:var(--faint)">“mb” = million barrels · “mb/d” = million barrels/day</span>
+      <span><b>Restocked by producers</b> ≈ 120 mb (the only part that was “relocated”)</span>
+      <span><b>Net loss to world reserves</b> ≈ 495 mb</span>
+      <span style="margin-left:auto;color:var(--faint)">120 + 495 = the 615 mb buyers drew · “mb” = million barrels</span>
     </div>
   </div>
 
@@ -156,7 +156,7 @@
   <!-- DEPLETION before->today (scope a + restock q1) -->
   <div class="qn" id="depletion">Restocking question 1 · how depleted are reserves now?</div>
   <h2>Reserves: before the war vs. today</h2>
-  <p class="sub">Reserve cover in <b>days of imports</b>, December 2025 vs. now, for the countries that publish both. Months = days ÷ 30.44. The split is stark: <b>Europe drew its reserves down; Asia mostly held or even built</b> (China and India kept buying discounted crude).</p>
+  <p class="sub">Reserve cover in <b>days of imports</b>, December 2025 vs. now — all 16 countries. Months = days ÷ 30.44. The split is stark: <b>Europe drew its reserves down; Asia mostly held or even built</b> (China and India kept buying discounted crude).</p>
   <span class="so">Depletion isn't uniform — it concentrated in Europe and the US strategic reserve, while big Asian buyers defended or grew their cover.</span>
   <div class="panel" style="overflow:auto">
     <table id="dtab">
@@ -164,7 +164,7 @@
       <tbody></tbody>
     </table>
   </div>
-  <div class="terms">Only 7 of the 16 countries publish a comparable “before” figure; the rest report today-only or nothing (net exporters). US strategic reserve is shown separately below — it fell 411→331 mb (−19%), the single sharpest drawdown.</div>
+  <div class="terms"><b>* estimated baseline</b> (Germany, Italy, Poland) from the EU/IEA 90-day obligation and historical levels — the war-pipeline verified an exact Dec-2025 figure for only 7 countries. <b>“–”</b> = no published baseline (Thailand, Philippines, Vietnam, Indonesia don't report a comparable days-of-cover series) or net exporter (USA, Netherlands, where the import-cover metric is undefined). The <b>US strategic reserve</b> is the sharpest drawdown of all (411→331 mb, −19%) — shown on its 50-year curve below.</div>
 
   <!-- SPR 50-YEAR CONTEXT -->
   <h2 id="context">Is this actually unprecedented? — the US reserve in 50-year context</h2>
@@ -312,9 +312,24 @@
 
 <script>
 // ---- data ----
+// b = Dec-2025 baseline (null if none); est = estimated baseline; note for net exporters
 const beforeToday=[
- {c:"Spain",b:120,t:91},{c:"UK",b:104,t:90},{c:"South Korea",b:208,t:205},
- {c:"France",b:98,t:98},{c:"India",b:74,t:76},{c:"Japan",b:200,t:205},{c:"China",b:122.5,t:130},
+ {c:"Spain",b:120,t:91},
+ {c:"UK",b:104,t:90},
+ {c:"Germany",b:110,t:99.1,est:1},
+ {c:"Poland",b:90,t:86.5,est:1},
+ {c:"South Korea",b:208,t:205},
+ {c:"France",b:98,t:98},
+ {c:"Italy",b:90,t:90,est:1},
+ {c:"India",b:74,t:76},
+ {c:"Japan",b:200,t:205},
+ {c:"China",b:122.5,t:130},
+ {c:"Thailand",b:null,t:117},
+ {c:"Philippines",b:null,t:46.47},
+ {c:"Vietnam",b:null,t:40.3},
+ {c:"Indonesia",b:null,t:21},
+ {c:"USA",b:null,t:null,note:"net exporter"},
+ {c:"Netherlands",b:null,t:null,note:"net exporter"},
 ];
 const consumer=[
  {c:"Japan",cover:205,dep:.90},{c:"South Korea",cover:205,dep:.90},
@@ -335,14 +350,17 @@ const producer=[
  {c:"Qatar",dep:0,tot:10.5,full:.92,shut:0.95,bypass:"No"},
 ];
 
-// ---- before->today table ----
-const dt=document.querySelector("#dtab tbody"), MO=30.44;
+// ---- before->today table (all 16) ----
+const dt=document.querySelector("#dtab tbody"), MO=30.44, dash=`<td class="n" style="color:var(--faint)">–</td>`;
+const mo=v=>v==null?dash:`<td class="n">${(v/MO).toFixed(1)}</td>`;
 beforeToday.forEach(r=>{
-  const d=r.t-r.b, cls=d<-2?"chg-dn":d>2?"chg-up":"chg-fl", sign=d>0?"+":"";
-  dt.insertAdjacentHTML("beforeend",`<tr>
-   <td>${r.c}</td><td class="n">${r.b}</td><td class="n">${(r.b/MO).toFixed(1)}</td>
-   <td class="n">${r.t}</td><td class="n">${(r.t/MO).toFixed(1)}</td>
-   <td class="n ${cls}">${sign}${d.toFixed(1)} d</td></tr>`);
+  const both=r.b!=null&&r.t!=null, d=both?r.t-r.b:null;
+  const cls=d==null?"":d<-2?"chg-dn":d>2?"chg-up":"chg-fl", sign=d>0?"+":"";
+  const bCell=r.b==null?dash:`<td class="n">${r.b}${r.est?'<span style="color:var(--faint)">*</span>':''}</td>`;
+  const tCell=r.t==null?dash:`<td class="n">${r.t}</td>`;
+  const chg=r.note?`<td class="n" style="color:var(--faint)">${r.note}</td>`
+            :d==null?dash:`<td class="n ${cls}">${sign}${d.toFixed(1)} d</td>`;
+  dt.insertAdjacentHTML("beforeend",`<tr><td>${r.c}</td>${bCell}${mo(r.b)}${tCell}${mo(r.t)}${chg}</tr>`);
 });
 
 // ---- exposure table ----
