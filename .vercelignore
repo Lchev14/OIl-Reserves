@@ -1,0 +1,8 @@
+# Deploy ONLY the dashboard. Everything below is excluded from the Vercel build,
+# so the workbook, reports, workflow, and build scripts are never served publicly.
+build
+docs
+workflows
+*.md
+*.xlsx
+*.py
