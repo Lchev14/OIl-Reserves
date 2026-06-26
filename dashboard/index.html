@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Hormuz 2026 — Crude Reserve & Restocking Terminal</title>
+<style>
+  :root{
+    --ink:#08161f; --panel:#0e2230; --panel2:#132d3d; --line:#1d3d50;
+    --txt:#e6eef2; --dim:#8aa6b4; --amber:#f5a623; --cyan:#39c0c8;
+    --good:#2bb673; --warn:#e8a13a; --bad:#e1564b; --grid:#1a3344;
+    --mono:'SF Mono',ui-monospace,'Roboto Mono',Menlo,Consolas,monospace;
+    --sans:'Inter',-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#06121a,#08161f 40%);color:var(--txt);font-family:var(--sans);font-size:13px;line-height:1.45}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 18px 60px}
+  header.term{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:2px solid var(--amber);
+    padding:14px 18px;background:#06121a;position:sticky;top:0;z-index:5}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.5px;color:var(--amber);font-size:15px}
+  .brand small{color:var(--dim);font-weight:400;letter-spacing:0}
+  .tick{font-family:var(--mono);font-size:12px;color:var(--dim);display:flex;gap:6px;align-items:center}
+  .tick b{color:var(--txt)}
+  .up{color:var(--good)} .dn{color:var(--bad)} .fl{color:var(--amber)}
+  .verdict{margin-left:auto;font-family:var(--mono);font-size:12px;background:#2a0f0d;border:1px solid var(--bad);
+    color:#ffd0cb;padding:5px 10px;border-radius:4px}
+  h2.sec{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cyan);margin:30px 0 12px;
+    border-left:3px solid var(--cyan);padding-left:10px}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(6,1fr)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:14px}
+  .kpi .lbl{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim)}
+  .kpi .val{font-family:var(--mono);font-size:21px;font-weight:700;margin-top:4px}
+  .kpi .sub{font-size:10.5px;color:var(--dim);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--grid);white-space:nowrap}
+  th{font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--dim);font-weight:600;position:sticky;top:54px;background:var(--panel)}
+  td.l,th.l{text-align:left}
+  td.num{font-family:var(--mono)}
+  tr:hover td{background:#10293799}
+  .tag{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:3px;letter-spacing:.3px}
+  .t-ver{background:#0c3325;color:#7ee2b0} .t-inf{background:#3a2f10;color:#f2cf85}
+  .t-mod{background:#3a210f;color:#f0b487} .t-abs{background:#23323a;color:#9fb4be}
+  .bar{height:7px;border-radius:3px;background:#16313f;position:relative;overflow:hidden;min-width:46px;display:inline-block;width:60px;vertical-align:middle}
+  .bar > i{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+  .risk-hi{color:var(--bad);font-weight:700} .risk-md{color:var(--warn)} .risk-lo{color:var(--good)}
+  .two{grid-template-columns:1.1fr .9fr}
+  .three{grid-template-columns:1fr 1fr 1fr}
+  .cap{font-size:11px;color:var(--dim);margin-top:8px;line-height:1.5}
+  .scn h4{margin:0 0 6px;font-family:var(--mono);font-size:13px}
+  .scn.s1 h4{color:var(--good)} .scn.s2 h4{color:var(--amber)} .scn.s3 h4{color:var(--bad)}
+  .scn .row{display:flex;gap:8px;font-size:11.5px;padding:4px 0;border-bottom:1px solid var(--grid)}
+  .scn .row span:first-child{color:var(--dim);min-width:74px}
+  .banner{background:#2a0f0d;border:1px solid var(--bad);border-radius:6px;padding:12px 14px;font-size:12px;color:#ffd9d4;margin-top:14px}
+  .banner b{color:#ff9d92}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:10.5px;color:var(--dim);margin-top:8px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  svg text{font-family:var(--mono);fill:var(--dim);font-size:10px}
+  .foot{margin-top:34px;font-size:10.5px;color:#5f7e8c;border-top:1px solid var(--line);padding-top:12px}
+  a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<header class="term">
+  <div class="brand">HORMUZ·2026 <small>CRUDE RESERVE & RESTOCKING TERMINAL</small></div>
+  <div class="tick">BRENT <b>$74.43</b> <span class="dn">▼ war-risk bled out</span></div>
+  <div class="tick">HORMUZ <b class="fl">4.8 mb/d</b> <span class="dim">contested-flowing (32% prewar)</span></div>
+  <div class="tick">US SPR <b>331 mb</b> <span class="dn">▼ lowest since 1983</span></div>
+  <div class="verdict">THESIS: <b>REFUTED</b> · ρ = 0.195</div>
+</header>
+
+<div class="wrap">
+
+  <h2 class="sec">Key indicators · as-of 26 Jun 2026 · war start 28 Feb · T = 118 days</h2>
+  <div class="grid kpis">
+    <div class="panel kpi"><div class="lbl">Brent now</div><div class="val">$74.43</div><div class="sub">$72 eve-of-war · $120 peak</div></div>
+    <div class="panel kpi"><div class="lbl">Hormuz flow</div><div class="val fl">4.8</div><div class="sub">mb/d · vs 15 prewar</div></div>
+    <div class="panel kpi"><div class="lbl">US SPR</div><div class="val">331</div><div class="sub">mb · 46% of nameplate</div></div>
+    <div class="panel kpi"><div class="lbl">IEA release</div><div class="val">400</div><div class="sub">mb · ~46% executed</div></div>
+    <div class="panel kpi"><div class="lbl">VLCC rate</div><div class="val">$180k</div><div class="sub">/day · >3× prewar</div></div>
+    <div class="panel kpi"><div class="lbl">ρ (conserv.)</div><div class="val" style="color:var(--bad)">0.195</div><div class="sub">≪ 1 → refuted</div></div>
+  </div>
+
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel">
+      <h2 class="sec" style="margin-top:0">Redistribution ledger — where the ~1,200 mb gap went</h2>
+      <svg id="waterfall" viewBox="0 0 560 260" width="100%" height="260" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="cap">Oil was <b>destroyed at source</b>, not redistributed. Producers shut in ~700–1,080 mb at the wellhead (tankage saturated in ~1–2 weeks) vs only ~120 mb genuinely stranded. ρ = producer build / consumer draw = 120/615 = <b>0.195</b>.</div>
+    </div>
+    <div class="panel">
+      <h2 class="sec" style="margin-top:0">Stock trajectory — inflection NOT yet turned</h2>
+      <svg id="traj" viewBox="0 0 560 260" width="100%" height="260" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="cap">OECD stocks −540 mb and SPR −80 mb decline <b>monotonically</b> through the latest print — no build-week yet. Price & freight have inflected; <b>stock has not</b>. Earliest plausible turn: Q4 2026.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">Consumer reserve cover — sorted by chokepoint fragility</h2>
+  <div class="panel" style="overflow:auto;max-height:560px">
+  <table id="consumer">
+    <thead><tr>
+      <th class="l">Country</th><th>Before d</th><th>Today d</th><th>Today mo</th><th>Δ%</th>
+      <th class="l">Hormuz-dep</th><th>Eff. at-risk d</th><th class="l">Confidence</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="legend">
+    <span><i style="background:#e1564b"></i>≤30 d effective (fragile)</span>
+    <span><i style="background:#e8a13a"></i>30–70 d</span>
+    <span><i style="background:#2bb673"></i>>70 d (insulated)</span>
+    <span style="margin-left:auto">Eff. at-risk = days × (1 − Hormuz-dep) — worst-case zero-replacement <b>bound</b>, not a coverage estimate</span>
+  </div>
+  </div>
+
+  <div class="grid two" style="margin-top:14px">
+    <div class="panel" style="overflow:auto">
+      <h2 class="sec" style="margin-top:0">Producer reserve cover — Gulf-6 (deployable vs stranded)</h2>
+      <table id="producer">
+        <thead><tr><th class="l">Country</th><th>Deploy d</th><th>Total d</th><th>Util %</th><th>Bypass mb/d</th><th>Shut-in mb/d</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="cap">Saudi shows 31.9 total days but only <b>7.7 deployable</b> — the rest is stranded behind the strait. OPEC spare is double-trapped: pumpable but not shippable; Kuwait & Basrah have zero bypass.</div>
+    </div>
+    <div class="panel">
+      <h2 class="sec" style="margin-top:0">Throughput — bypass ceiling vs stranded</h2>
+      <svg id="bypass" viewBox="0 0 540 230" width="100%" height="230" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="cap">Normal Hormuz crude ~15 mb/d. Bypass realized only ~5.7 (Yanbu port-gated, not pipeline-gated). End-state stranded ~4.5 mb/d.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">Scenario tree — Hormuz duration (probabilities unweighted)</h2>
+  <div class="grid three">
+    <div class="panel scn s1"><h4>S1 · Reopen-fast</h4>
+      <div class="row"><span>Trigger</span><span>Ceasefire → settlement; IRGC lifts closure</span></div>
+      <div class="row"><span>Reserves</span><span>Draw halts then reverses; slow SPR refill</span></div>
+      <div class="row"><span>Brent</span><span>$60–68</span></div>
+      <div class="row"><span>Restock</span><span>Multi-quarter, bypass-gated (~3–4 yr SPR)</span></div>
+    </div>
+    <div class="panel scn s2"><h4>S2 · Contested-grinding <small style="color:var(--dim)">(base)</small></h4>
+      <div class="row"><span>Trigger</span><span>Ceasefire holds, doesn't convert; ~4.8 mb/d</span></div>
+      <div class="row"><span>Reserves</span><span>Slow draw; SPR 1.29→0.72 mb/d; ρ~0.20</span></div>
+      <div class="row"><span>Brent</span><span>$70–85, spikes decay in days</span></div>
+      <div class="row"><span>Restock</span><span>None — net draw continues</span></div>
+    </div>
+    <div class="panel scn s3"><h4>S3 · Reclose-hard</h4>
+      <div class="row"><span>Trigger</span><span>Ceasefire collapses; mining/interdiction</span></div>
+      <div class="row"><span>Reserves</span><span>Draw re-accelerates; Gulf re-strands</span></div>
+      <div class="row"><span>Brent</span><span>Toward/above $120</span></div>
+      <div class="row"><span>Hard clock</span><span class="risk-hi">US SPR→150 mb floor ~5 Nov 2026</span></div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <b>Data-integrity caveat (load-bearing).</b> Verification was <b>not fully independent</b>: primary IEA OMR / EIA weekly hosts were egress-proxy-403-blocked at run time, so many cells are <b>wire-attributed</b> (one tier below Verified). Re-pull iea.org / eia.gov directly before external use. Isolated red team raised 10 attacks, all addressed in-run; verify verdict: ship.
+  </div>
+
+  <div class="foot">
+    Source: workflow run <span style="font-family:var(--mono)">wf_9642a98b-45e</span> · 52 agents · ~1.9M tokens · as-of 26 Jun 2026.
+    Single-file, no external dependencies — deployable to Vercel as-is. Figures decay fast; re-run to refresh.
+  </div>
+</div>
+
+<script>
+const consumer=[
+ {c:"Philippines",b:null,t:46.47,dep:.95,risk:2.3,conf:"inf"},
+ {c:"Vietnam",b:null,t:40.3,dep:.88,risk:4.8,conf:"inf"},
+ {c:"Indonesia",b:null,t:21,dep:.20,risk:16.8,conf:"inf"},
+ {c:"Japan",b:200,t:205,dep:.90,risk:20.5,conf:"inf"},
+ {c:"South Korea",b:208,t:205,dep:.90,risk:20.5,conf:"inf"},
+ {c:"Thailand",b:null,t:117,dep:.55,risk:52.7,conf:"inf"},
+ {c:"India",b:74,t:76,dep:.30,risk:53.2,conf:"inf"},
+ {c:"China",b:122.5,t:130,dep:.46,risk:70.2,conf:"inf"},
+ {c:"Italy",b:null,t:90,dep:.18,risk:73.8,conf:"inf"},
+ {c:"Poland",b:null,t:86.5,dep:.13,risk:75.3,conf:"mod"},
+ {c:"UK",b:104,t:90,dep:.07,risk:83.7,conf:"inf"},
+ {c:"Spain",b:120,t:91,dep:.06,risk:85.5,conf:"mod"},
+ {c:"France",b:98,t:98,dep:.11,risk:87.2,conf:"inf"},
+ {c:"Germany",b:null,t:99.1,dep:.05,risk:94.1,conf:"mod"},
+ {c:"USA",b:null,t:null,dep:.08,risk:null,conf:"abs"},
+ {c:"Netherlands",b:null,t:null,dep:.06,risk:null,conf:"abs"},
+];
+const producer=[
+ {c:"Saudi Arabia",d:7.7,tot:31.9,u:.92,byp:4.5,shut:2.3},
+ {c:"UAE",d:9,tot:14,u:.90,byp:1.8,shut:1.4},
+ {c:"Iran",d:6,tot:57,u:.91,byp:0.1,shut:1.45},
+ {c:"Iraq",d:0.3,tot:4.7,u:.95,byp:0.3,shut:1.5},
+ {c:"Kuwait",d:4.2,tot:16,u:.90,byp:0,shut:2.0},
+ {c:"Qatar",d:0,tot:10.5,u:.92,byp:0,shut:0.95},
+];
+const TAG={ver:["t-ver","Verified"],inf:["t-inf","Inferred"],mod:["t-mod","Modelled-EST"],abs:["t-abs","Absent"]};
+const fmt=v=>v==null?"–":(Math.round(v*10)/10).toFixed(1);
+const riskClass=v=>v==null?"":v<=30?"risk-hi":v<=70?"risk-md":"risk-lo";
+const barColor=v=>v==null?"#33505f":v<=30?"#e1564b":v<=70?"#e8a13a":"#2bb673";
+
+const ctb=document.querySelector("#consumer tbody");
+consumer.forEach(r=>{
+  const dpct=(c=>`<span class="bar"><i style="width:${Math.round(r.dep*100)}%;background:${r.dep>=.7?'#e1564b':r.dep>=.4?'#e8a13a':'#39c0c8'}"></i></span> ${Math.round(r.dep*100)}%`)();
+  const dpc=r.b!=null&&r.t!=null?`${(((r.t-r.b)/r.b*100)>=0?'+':'')}${((r.t-r.b)/r.b*100).toFixed(1)}%`:"–";
+  ctb.insertAdjacentHTML("beforeend",`<tr>
+   <td class="l">${r.c}</td>
+   <td class="num">${fmt(r.b)}</td>
+   <td class="num">${fmt(r.t)}</td>
+   <td class="num">${r.t!=null?(r.t/30.44).toFixed(1):"–"}</td>
+   <td class="num ${r.b!=null&&r.t!=null?((r.t-r.b)<0?'dn':'up'):''}">${dpc}</td>
+   <td class="l">${dpct}</td>
+   <td class="num ${riskClass(r.risk)}">${fmt(r.risk)}</td>
+   <td class="l"><span class="tag ${TAG[r.conf][0]}">${TAG[r.conf][1]}</span></td>
+  </tr>`);
+});
+const ptb=document.querySelector("#producer tbody");
+producer.forEach(r=>{
+  ptb.insertAdjacentHTML("beforeend",`<tr>
+   <td class="l">${r.c}</td>
+   <td class="num ${r.d<=5?'risk-hi':''}">${r.d}</td><td class="num">${r.tot}</td>
+   <td class="num">${Math.round(r.u*100)}%</td>
+   <td class="num ${r.byp==0?'risk-hi':''}">${r.byp}</td><td class="num">${r.shut}</td>
+  </tr>`);
+});
+
+// ---- waterfall ----
+(function(){
+  const svg=document.getElementById("waterfall"); const W=560,H=260,pad=34,base=210;
+  const legs=[["Consumer\ndraw",-615,"#e1564b"],["Demand\ndestruct.",-472,"#e8a13a"],
+    ["Atlantic\nsub (in)",+410,"#39c0c8"],["Producer\nbuild",+120,"#2bb673"],["Foregone\noutput",-775,"#8a5a2b"]];
+  const maxAbs=900, sx=(W-2*pad)/legs.length, scale=(base-30)/maxAbs;
+  legs.forEach((l,i)=>{
+    const h=Math.abs(l[1])*scale, x=pad+i*sx+10, w=sx-20;
+    const y=l[1]<0?base:base-h;
+    svg.insertAdjacentHTML("beforeend",
+      `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${l[2]}" rx="2" opacity=".9"/>
+       <text x="${x+w/2}" y="${l[1]<0?base+h+12:base-h-6}" text-anchor="middle" fill="#e6eef2">${l[1]>0?'+':''}${l[1]}</text>`);
+    l[0].split("\n").forEach((t,k)=>svg.insertAdjacentHTML("beforeend",
+      `<text x="${x+w/2}" y="${base+26+k*11}" text-anchor="middle">${t}</text>`));
+  });
+  svg.insertAdjacentHTML("beforeend",`<line x1="${pad}" y1="${base}" x2="${W-pad}" y2="${base}" stroke="#1d3d50"/>`);
+})();
+
+// ---- trajectory dual-line ----
+(function(){
+  const svg=document.getElementById("traj"); const W=560,H=260,L=44,R=44,T=16,B=40;
+  const wk=["27Feb","13Mar","03Apr","08May","15May","29May","19Jun","26Jun"];
+  const oecd=[4100,4064,4000,3825,3787,3711,3598,3560], spr=[411,411,400.9,384.1,374.2,357.1,331.2,331.2];
+  const xn=i=>L+i*(W-L-R)/(wk.length-1);
+  const oY=v=>T+(1-(v-3500)/(4150-3500))*(H-T-B);
+  const sY=v=>T+(1-(v-320)/(415-320))*(H-T-B);
+  const path=(a,f)=>a.map((v,i)=>`${i?'L':'M'}${xn(i).toFixed(1)} ${f(v).toFixed(1)}`).join(" ");
+  // gridlines
+  for(let g=0;g<=4;g++){const y=T+g*(H-T-B)/4;svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#13283400"/>`);}
+  svg.insertAdjacentHTML("beforeend",`<path d="${path(oecd,oY)}" fill="none" stroke="#39c0c8" stroke-width="2"/>`);
+  svg.insertAdjacentHTML("beforeend",`<path d="${path(spr,sY)}" fill="none" stroke="#f5a623" stroke-width="2"/>`);
+  oecd.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${oY(v)}" r="2.4" fill="#39c0c8"/>`));
+  spr.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${xn(i)}" cy="${sY(v)}" r="2.4" fill="#f5a623"/>`));
+  wk.forEach((w,i)=>svg.insertAdjacentHTML("beforeend",`<text x="${xn(i)}" y="${H-24}" text-anchor="middle">${w}</text>`));
+  svg.insertAdjacentHTML("beforeend",`<text x="${L}" y="${H-8}" fill="#39c0c8">— OECD stock (mb, L)</text><text x="${W-R}" y="${H-8}" text-anchor="end" fill="#f5a623">US SPR (mb, R) —</text>`);
+})();
+
+// ---- bypass bars ----
+(function(){
+  const svg=document.getElementById("bypass"); const W=540,rows=[["Hormuz normal",15,"#39c0c8"],
+    ["Bypass ceiling",6.5,"#e8a13a"],["Bypass realized",5.7,"#f5a623"],["Hormuz now",4.8,"#2bb673"],["Stranded",4.5,"#e1564b"]];
+  const L=120, max=15, sx=(W-L-40)/max;
+  rows.forEach((r,i)=>{const y=18+i*40;
+    svg.insertAdjacentHTML("beforeend",
+     `<text x="${L-8}" y="${y+14}" text-anchor="end" fill="#e6eef2">${r[0]}</text>
+      <rect x="${L}" y="${y}" width="${r[1]*sx}" height="20" rx="3" fill="${r[2]}" opacity=".9"/>
+      <text x="${L+r[1]*sx+6}" y="${y+14}">${r[1]} mb/d</text>`);
+  });
+})();
+</script>
+</body>
+</html>
