@@ -37,6 +37,8 @@ Days (and months) of net-import cover. Months = days ÷ 30.44. `EST.` = estimate
 
 *Cross-country authority for all rows: **IEA** "Oil stocks of IEA countries" (days-of-net-import-cover) + **JODI** for non-OECD. Bold = the national agency that publishes the primary figure.*
 
+**Corroboration (official obligation framework):** our estimates sit next to the legal obligation levels — Spain **92-day** total (CORES 42 + industry 50; ~120 mb; released 11.5 mb on 17-Mar-26), Poland **90-day** (RARS 37 + industry 53), Netherlands COVA (61-day consumption basis), all EU members ≥ 90-day IEA rule. **To replace the estimates with the exact current integers (free, no login):** Eurostat **`nrg_stk_oem`** (days-equivalent, monthly, all EU) at `ec.europa.eu/eurostat/databrowser` → for non-OECD, the **JODI-Oil** world database CSV at `jodidata.org`. (Both are egress-blocked from this build environment, so they must be pulled on your machine — they are the clean path to a fully-verified table.)
+
 **Read:** depletion concentrated in **Europe and the US strategic reserve**; big Asian buyers (China, Japan, India) **held or built** by buying discounted crude. **Exposure ≠ coverage:** Japan/Korea show ~200 days but ~90% of their crude transits Hormuz, so their real exposure is far higher than the headline suggests.
 
 ## 2 · Key indicators
