@@ -8,6 +8,8 @@ A decision-grade intelligence product on global crude reserves during the 2026 S
 |---|---|
 | `MASTER_PROMPT_crude_reserve_restocking_hormuz2026.md` | The master prompt v2 (OAS pattern). Portable across tiers; paste-runnable in any Claude session. |
 | `workflows/hormuz-reserve-intel.workflow.js` | The same pipeline as an **executable** Claude Code Workflow — ~50 agents, structured-output schemas per agent, gates enforced in code. |
+| `EXCEL_BUILD_SPEC.md` | How to **build** the 9-sheet workbook natively inside Excel/Copilot. |
+| `EXCEL_DATA_SOURCING.md` | How to **source the figures** in office M365 Copilot (Opus 4.8) — connector/Power Query/web-grounding diagnostics, wired to the reserve depletion → rebuild → exceed thesis (R/P, RRR). |
 
 The two are kept in sync: the workflow is the master prompt made runnable.
 
