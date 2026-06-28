@@ -1,0 +1,17 @@
+Country,Before (days),Before (months),"Today (days, EST.)",Today (months),Delta days,Delta %,Basis,Source & Date
+USA (SPR),-,-,-,-,-,-,-,net exporter — metric undefined; SPR tracked in key_indicators
+Germany,-,-,99,=D3/30.44,-,-,E,EBV/BMWE + IEA
+France,98,=B4/30.44,98,=D4/30.44,=D4-B4,=(D4-B4)/B4,W,"IEA / Eurostat, Apr-26"
+UK,104,=B5/30.44,90,=D5/30.44,=D5-B5,=(D5-B5)/B5,W,"GOV.UK / IEA, Mar-26"
+Italy,-,-,90,=D6/30.44,-,-,W,IEA / EU Dir 2009/119
+Spain,120,=B7/30.44,91,=D7/30.44,=D7-B7,=(D7-B7)/B7,E,"CORES / IEA, Mar-26"
+Netherlands,-,-,-,-,-,-,-,net exporter — metric undefined
+Poland,-,-,87,=D9/30.44,-,-,E,IEA + model
+Japan,200,=B10/30.44,205,=D10/30.44,=D10-B10,=(D10-B10)/B10,W,"METI / PAJ / S&P, May-26"
+South Korea,208,=B11/30.44,205,=D11/30.44,=D11-B11,=(D11-B11)/B11,W,"KNOC / IEA / CSIS, May-26"
+China,122,=B12/30.44,130,=D12/30.44,=D12-B12,=(D12-B12)/B12,W,"Reuters (Kemp) / EIA, 2026"
+India,74,=B13/30.44,76,=D13/30.44,=D13-B13,=(D13-B13)/B13,W,"Min. Petroleum, 8-Jun-26"
+Thailand,-,-,117,=D14/30.44,-,-,W,Thai Energy Min. (on-ground ~56d)
+Philippines,-,-,46,=D15/30.44,-,-,W,"PH DOE OIMB, 12-Jun-26"
+Indonesia,-,-,21,=D16/30.44,-,-,W,ESDM (capacity-capped ~25d)
+Vietnam,-,-,40,=D17/30.44,-,-,W,"VietnamNet, May-26"

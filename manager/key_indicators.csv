@@ -1,0 +1,7 @@
+Indicator,Pre-war,Peak,Now (26 Jun),Basis,Source
+Brent crude ($/bbl),72 (27 Feb),~120,~74,V,EIA / Trading Economics
+US SPR (mb),411,-,331,V,EIA WPSR
+US SPR fill (% of ~714 capacity),58%,-,46%,V,= SPR / 714
+Hormuz crude flow (mb/d),~15,-,~4.8,W,Kpler / wires
+IEA coordinated release (mb),-,-,400 (US share 172),V,"IEA, 11-Mar-26"
+VLCC freight Gulf->Asia ($/day),~55000,~470000,~180000,W,Lloyd's List / Hellenic
