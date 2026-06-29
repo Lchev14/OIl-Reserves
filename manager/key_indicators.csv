@@ -1,7 +1,8 @@
 Indicator,Pre-war,Peak,Now (26 Jun),Basis,Source
-Brent crude ($/bbl),72 (27 Feb),~120,~74,V,EIA / Trading Economics
-US SPR (mb),411,-,331,V,EIA WPSR
+Brent crude ($/bbl),72 (27 Feb),~120,~72 (26 Jun),V,"Verified — Trading Economics / Fortune, 26-Jun-26 (fell to 71.99, lowest since 27-Feb)"
+US SPR (mb),411,-,331,V,"Verified — EIA WPSR, w/e 19-Jun-26"
 US SPR fill (% of ~714 capacity),58%,-,46%,V,= SPR / 714
-Hormuz crude flow (mb/d),~15,-,~4.8,W,Kpler / wires
-IEA coordinated release (mb),-,-,400 (US share 172),V,"IEA, 11-Mar-26"
+Hormuz crude flow (mb/d),~15,-,~4.8,V,"Verified — Kpler / Reuters / CNBC, late-Jun-26; wartime trough ~2.7 (IEA, Mar-May); recovering ~75% prewar"
+IEA coordinated release (mb),-,-,400 (US share 172),V,"IEA, 11-Mar-26 (authorised)"
+IEA release executed (mb),-,-,~165 (EST),E,"EST — OECD govt-stock draw ~163mb (IEA OMR, Jun-26); US ~75-80mb realized (EIA WPSR); full exec not officially tallied"
 VLCC freight Gulf->Asia ($/day),~55000,~470000,~180000,W,Lloyd's List / Hellenic
