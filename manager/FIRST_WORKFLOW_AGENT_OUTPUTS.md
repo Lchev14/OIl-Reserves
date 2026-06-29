@@ -1,5 +1,7 @@
 # First Workflow — Raw Agent Outputs (salvaged)
 
+> ⚠️ **SUPERSEDED (29 Jun 2026).** Legacy evidence from the *first* workflow (`wf_9642a98b`). The current evidence base is **`DEEPDIVE_AGENT_OUTPUTS.md`** (run `wf_79741567`) and the source of truth is **`MASTER_ASSESSMENT_Jun26.md`**. Kept for provenance and cross-checking.
+
 *Distilled final output of every agent from run `wf_9642a98b-45e` (52 agents, ~1.9M tokens, ~59 min, 26 Jun 2026). This is the per-agent detail that fed the synthesis but was never committed before. StructuredOutput = the agent's validated final result.*
 
 ---

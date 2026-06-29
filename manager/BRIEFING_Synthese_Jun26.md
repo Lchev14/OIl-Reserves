@@ -1,5 +1,7 @@
 # Crude Reserves & Restocking — Synthèse Jun-2026
 
+> ⚠️ **SUPERSEDED (29 Jun 2026).** This is a legacy briefing (first workflow, run `wf_9642a98b`). The current source of truth is **`MASTER_ASSESSMENT_Jun26.md`** (built on `DEEP_SYNTHESIS.md` + `DEEPDIVE_AGENT_OUTPUTS.md` + the source-verified workbook). Kept for provenance. Note: this doc nets restocking demand as *negative* (−166 mb); the master reconciles that against the deep-dive's *slightly-positive* rate — see Part 4 of the master. Its ρ-test and exposure framing were promoted into the master (Part 5).
+
 *Energy-markets briefing · as of 26 Jun 2026 · 118 days into the Iran–Hormuz conflict (war start 28 Feb).*
 
 ---
