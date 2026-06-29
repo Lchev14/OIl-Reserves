@@ -37,6 +37,17 @@ A four-act arc: **shock** (Hormuz ~20→2.7 mb/d; Brent $72→~$120) → **produ
 | Hormuz crude flow (mb/d) | ~15 | – | ~4.8 (recovering) |
 | IEA release (mb) | – | – | 400 auth / ~165 exec (EST) |
 
+**Strategic reserve stocks & depletion (verified):**
+
+| Reserve pool | Before | Now / latest | Δ (depletion) | Source |
+|---|--:|--:|--:|---|
+| US SPR | 411 mb (Dec-25) | 331 mb (19 Jun) | **−80 mb / −19%**, lowest since 1983 | EIA WPSR [V] |
+| OECD **government** stocks | – | lowest since **Dec-1990** | **−163 mb** | IEA OMR [V] |
+| OECD total liquids | ~2.8 bn bbl (5-yr avg) | ~2.3 bn (f'cast end-26) | **~−0.5 bn**; ~50 days cover (lowest since 2003) | EIA STEO [V] |
+| IEA coordinated release | – | **400 auth / ~165 executed** | US 172 · JP 80 · KR 22.5 · DE 19.5 · FR 14.6 · UK 14 · ES 11.6 · IT 10 · PL 7.5 mb | IEA [V auth / EST exec] |
+
+*Per-country strategic-stock levels in mb (USA 331, Japan ~263, Korea ~78, Germany ~177, France ~120, Spain ~120, China ~360+, India ~39…) are in `DEEPDIVE_AGENT_OUTPUTS.md` and the workbook — first-pass / wire-tier, not all independently re-verified, so kept out of this verified table.*
+
 **Reserve coverage, days (source-verified):** EU members sit *flat at the ~90-day legal floor* (Germany 91, France 92, Italy 92, Spain 92, NL 90, Poland 90 — Eurostat) — falling net imports offset the draw, so this is *not* the depletion story. Japan ~200 / Korea ~208 (IEA, structurally high). India ~60 (EST). China/Philippines/Indonesia/Vietnam: no comparable official series (`–`). **The real depletion is the US SPR and OECD *government* stocks, not Europe.**
 
 ---
