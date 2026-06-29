@@ -52,19 +52,21 @@ A four-act arc since 28 Feb (all figures source-verified unless tagged EST):
 
 *Scenarios are forward PROJECTIONS (EST); price anchors map to the named forecaster bench.*
 
-### Scenario A — Truce / reopening **holds** (base case, ~60–65% subjective)
+> **Probability reframe (panel, 29 Jun):** the earlier binary was too crude. The forward-scenario panel's calibration + red team yields **three** buckets: **A. clean/durable reopening holds ~35%** · **B. oscillation / short re-closure episode(s) ~50%** (spikes to ~$95–115 then revert — the 1987-88 Tanker War precedent: the Strait never fully closed even under heavy attack; the 20-Jun reclosure reversed within a week) · **C. durable multi-month enforced re-closure ~10–15%** ($115–150). A *clean* reopening is the minority; *some* re-closure episode is likely (~65%) but mostly short. See `MANAGER_BRIEF_Jun26.md` §3.
+
+### Scenario A — Truce / reopening **holds, clean** (~35%)
 - **Reserves:** draw decelerates then stops H2-2026; **refill is slow, back-loaded and gated** (bypass to 2027; SPR ~3 mb/month → pre-crisis ~414 mb by ~2028, nameplate ~2031). No sharp rebuild.
 - **Restock race:** stays a **2027 latent floor**, not a 2026 auction; commercial restock trickles in on contango; China dip-buys sub-$70; it is **self-cancelling** (rallies kill the buying).
 - **Price:** **~$64–80** — JPMorgan ~$64 (2027), Goldman ~$75, Morgan Stanley ~$80; current ~$72 sits inside this band [V: bench]. Bias **lower** if demand destruction proves permanent and OPEC+ spare returns to a soft market (Rystad >3 mb/d glut end-26, ~5 mb/d 2027).
 - **Timeline:** war premium gone; consumer relief lags the crude fall by the ~4-month CPI pass-through.
 
-### Scenario B — Truce / reopening **fails / Strait re-closes** (~35–40%)
+### Scenario B/C — Truce **fails / Strait re-closes** (durable ~10–15%; any re-closure episode ~65%)
 - **Reserves:** draw **re-accelerates**; Gulf re-strands; OECD govt stocks blow through the Dec-1990 low. Hard clock: US SPR → ~150 mb floor ~Nov-26 at the acute rate; an OECD-level emergency-action threshold ~mid-Nov [EST extrapolation].
 - **Restock race:** irrelevant — survival sourcing dominates; refill **indefinitely deferred**.
 - **Price:** **~$105–130+** — Rapidan ~$130 summer peak; RBC "risk underpriced"; a hard closure could re-rate above $120 [V: bench]. Demand destruction deepens (Rapidan: recession risk rivalling 2008).
 - **Timeline:** premium returns within **weeks** of any re-closure; the ~4-month bypass/refill constraints mean **no quick relief valve**.
 
-**The hinge between A and B is binary, not a midpoint** — averaging the two produces a number no institution holds. Watch the two switches: (1) does the navigation deal convert to a settlement, and (2) does the demand snap back or stay destroyed.
+**The hinge is not a midpoint** — averaging the buckets produces a number no institution holds. Watch three switches: (1) does the ~mid-Aug 60-day MoU convert to a settlement (and does Lebanon stay calm — Iran has tied Hormuz to it); (2) does **war-risk insurance** normalise (the *real* second blockade — premiums ran ~0.25%→3–8% of hull; flow doesn't return on a political deal alone if cover stays prohibitive); (3) does demand snap back or stay destroyed (largely a Fed/recession call). Note the red team's caution: even Scenario A is a *glide-path, not a V-shape*, and a "deep inventory hole + contango" combination is in mild tension — treat the contango as the de-escalation tell, not as proof of comfortable supply.
 
 ---
 
@@ -87,9 +89,9 @@ Both reach the **same practical verdict — no restocking race that matters** �
 Things the legacy docs raised that the deep-dive under-weighted and that are **worth carrying forward — flagged by what still needs checking**:
 
 1. **The ρ ("rho") conservation test** [carry — rates V, verdict robust]. ρ = producer build / consumer draw ≈ **0.20** (band 0.15–0.26) → the "a chokepoint conserves reserves by stranding them producer-side" hypothesis is **REFUTED**. Mechanism verified this session (tankage saturated → wellhead shut-in). This is the sharpest analytical frame in the whole corpus; promote it.
-2. **Hormuz-dependence / "effective at-risk cover"** [carry **only if reframed + verified**]. The exposure lens (Japan/Korea ~90% Hormuz-routed, Philippines ~95%, Vietnam ~88%, Thailand ~55%) is valuable, but the briefing's `days × (1 − dependence)` metric (Japan 205→20.5d) is a **worst-case zero-replacement bound, not a coverage estimate** — the red team correctly flagged it as dimensionally incoherent. *To use: verify dependence shares against EIA Hormuz trade-flow data and relabel as a bound.*
-3. **US as marginal replacement supplier** [carry — verify]. The shock was coverage-*positive* for the US (record net exports ~5.8 mb/d in Apr per the briefing). *Verify against EIA monthly trade data before quoting.*
-4. **Qatar condensate–gas linkage** [carry — verify]. Qatar's oil shut-in is partly an involuntary gas-side casualty (condensate co-produced with North Field). *Verify the LNG-outage duration claim.*
+2. **Hormuz-dependence / "effective at-risk cover"** [**panel-verified, partly**]. Dependence shares confirmed for the majors — **Japan ~90%, Korea ~70%, China ~40–45%, India ~40%** (all falling on Russian/Atlantic diversification); SE-Asia (Philippines/Vietnam/Thailand) only as *Middle-East-share proxies*, not clean Hormuz transit; **Italy has no standalone published figure** (EU aggregate ~10–13% only). Methodology flag: authoritative datasets publish the *inverse* metric (share of Hormuz flow going to each buyer). Use the exposure lens, but keep `days × (1 − dependence)` explicitly as a **worst-case zero-replacement bound**, not a coverage estimate.
+3. **US as marginal replacement supplier** [**panel-verified — with a correction**]. The record **~5.8 mb/d net export (Apr 2026) is confirmed**, but it is overwhelmingly a *refined-products* story — the US **remained a net crude importer** in April (crude self-sufficiency was *not* achieved). Coverage-positive for the US in trade terms; do **not** claim crude independence.
+4. **Qatar condensate–gas linkage** [**panel-verified**]. Confirmed: Iranian strikes on Ras Laffan took out **~17% of LNG capacity (12.8 mtpa, 3–5 yr repair, force majeure)**; condensate exports fell **~24%** as a North-Field gas-stream byproduct — i.e. an involuntary **gas-side casualty**, not a deliberate oilfield cut.
 5. **Bimodal price framing** [carry — V]. "Two outcomes, not a middle" is the right way to present the bench; already reflected in Part 3.
 
 **Still-open / to-verify before external use:** producer storage-util % for non-Iran Gulf states (only Iran is country-specific); the precise executed vs authorised IEA total (~165 mb is an EST proxy); India days-of-cover (no clean PPAC/JODI series); the OECD weekly trajectory (modelled, no weekly series).
