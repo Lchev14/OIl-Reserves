@@ -59,9 +59,10 @@ notes = [
     "",
     "CONFIDENCE LADDER:  Verified-official > Inferred-triangulated > Modelled-EST > Absent('-').  A model is at most ONE source class.",
     "",
-    ("UPDATE 28 Jun 26: Consumer days + Key Indicators RE-VERIFIED vs Eurostat nrg_stk_oem, IEA oil-stocks tool & EIA WPSR.", "b"),
+    ("UPDATE 29 Jun 26: Consumer, Key Indicators, Producer, Trajectory & Ledger RE-VERIFIED vs IEA OMR, EIA, Eurostat, Kpler & Columbia CGEP.", "b"),
+    ("  Verified = flow RATES + EIA weekly SPR series. Cumulative-mb ledger legs stay Inferred/EST; OECD weekly = Modelled-EST (no weekly OECD series).", None),
     ("  EU stocks sit flat at the ~90d legal floor (net imports fell with stocks). India=EST; China/PH/ID/VN have no official series ('-').", None),
-    ("CAVEAT: the analytic sheets (Ledger / Throughput / Trajectory / Scenarios) keep original wire-attribution — re-pull before external use.", "r"),
+    ("CAVEAT: Throughput & Scenarios sheets keep original wire-attribution — re-pull before external use.", "r"),
     "",
     "Sheets:  Consumer | Producer | Key Indicators | Ledger | Throughput | Trajectory | Scenarios | Footnotes",
 ]
@@ -122,12 +123,12 @@ headers(ws, ["Country", "Export-cover days (deployable)", "Export-cover days (to
              "Shut-in (mb/d)", "Confidence", "Source & Date"],
         [14, 16, 15, 15, 15, 14, 12, 14, 12, 21, 40])
 producer = [
-    ("Saudi Arabia", 7.7, 31.9, 150, 30, 18, .92, 4.5, 2.3, "Inferred-triangulated", "Argus/Bloomberg/Kayrros, Mar-Jun 26"),
-    ("UAE",          9.0, 14.0,   0, 42,  6, .90, 1.8, 1.4, "Inferred-triangulated", "IEA OMR via The National, 24 Jun 26"),
-    ("Iran",         6.0, 57.0, 106,  0,  0, .91, 0.1, 1.45,"Inferred-triangulated", "Kpler/Al Jazeera, Jun 26"),
-    ("Iraq",         0.3,  4.7,  17,  1,  0, .95, 0.3, 1.5, "Inferred-triangulated", "Bloomberg/IEA OMR Apr/Basra Oil Co"),
-    ("Kuwait",       4.2, 16.0,  21,  0,7.5, .90, 0.0, 2.0, "Inferred-triangulated", "Bloomberg/Zawya/The National, Apr-Jun 26"),
-    ("Qatar",        0.0, 10.5,  10,  0,  0, .92, 0.0, 0.95,"Modelled-EST",          "EIA Qatar brief + OilPrice (downgraded)"),
+    ("Saudi Arabia", 7.7, 31.9, 150, 30, 18, .92, 4.5, 2.0, "Inferred-triangulated", "Shut-in ~2.0 (Bloomberg 9 Mar, V); Yanbu bypass ~4.5 (Fortune 28 Mar, V); storage/floating in Gulf aggregate"),
+    ("UAE",          9.0, 14.0,   0, 42,  6, .90, 1.6, 1.4, "Inferred-triangulated", "Fujairah/ADCOP 1.62 mb/d Mar (Kpler, V); UAE shut-in within Gulf aggregate (EIA), no country figure"),
+    ("Iran",         6.0, 57.0, 127,  0,  0, .74, 0.0, 2.5, "Inferred-triangulated", "Storage ~74% Kharg (Columbia CGEP 28 Apr); floating ~127-147 mb (Kpler 24 Jun); shut-in ~2.5 (Goldman); no bypass (blockade 13 Apr)"),
+    ("Iraq",         0.3,  4.7,  17,  1,  0, .95, 0.25,1.5, "Inferred-triangulated", "Shut-in ~1.5 (Reuters 3 Mar, V); Kirkuk-Ceyhan ~0.25 (The National 16 Mar, V); tanks full (qual.)"),
+    ("Kuwait",       4.2, 16.0,  21,  0,7.5, .90, 0.0, 2.0, "Inferred-triangulated", "Force majeure 20 Apr (WorldOil, V); shut-in mb/d inferred (no exact figure); no bypass line"),
+    ("Qatar",        0.0, 10.5,  10,  0,  0, .92, 0.0, 0.95,"Modelled-EST",          "Force majeure all exports 3 Mar (V); crude shut-in mb/d not individually published; no bypass"),
 ]
 for i, row in enumerate(producer):
     r = i + 1
@@ -159,11 +160,11 @@ ws = wb.add_worksheet("Ledger"); ws.set_column(0, 0, 42); ws.set_column(1, 1, 12
 ws.write(0, 0, "GLOBAL REDISTRIBUTION LEDGER — thesis test (all mb, window T=118d)", F["title"])
 ws.write(2, 0, "Leg", F["hdr"]); ws.write(2, 1, "mb", F["hdr"]); ws.write(2, 2, "Note", F["hdr"])
 legs = [
-    ("Consumer / strategic stock draw", 615, "incl ~80 SPR + ~106 other-IEA strategic releases"),
-    ("Demand destruction", 472, "2Q26 deliveries -5 mb/d y/y (IEA OMR Jun)"),
-    ("Atlantic substitution (in)", 410, "rerouted East-of-Suez"),
-    ("Producer build (stranded)", 120, "floating ~100 + onshore ~20"),
-    ("Foregone output (shut-in)", 775, "time-weighted ~700-850 (flat-rate point ~1,080)"),
+    ("Consumer / strategic stock draw", 615, "EST cumulative; rate V: global -3.8 mb/d, OECD govt -163 mb (IEA OMR Jun); incl ~80 SPR realized"),
+    ("Demand destruction", 472, "rate V: 2Q26 deliveries -5 mb/d y/y (IEA OMR Jun); x~94d -> EST cumulative"),
+    ("Atlantic substitution (in)", 410, "rate V: +3.5 mb/d East-of-Suez (IEA OMR Jun) x118d=413; REALLOCATION not new supply (don't sum as absorption)"),
+    ("Producer build (stranded)", 120, "EST: floating ~100 (Kpler ~67-100 stranded in Gulf, 24 Jun) + onshore ~20 modelled"),
+    ("Foregone output (shut-in)", 775, "EST; rate V: Gulf shut-in 7.5(Mar)->9.1(Apr) mb/d (MEES/EIA); time-weighted ~700-850 (flat ~1,080)"),
 ]
 for i, (n, mb, note) in enumerate(legs):
     r = i + 3
@@ -197,13 +198,14 @@ for i, (q, v, n) in enumerate(tp):
 # ============================================================ TRAJECTORY ====
 ws = wb.add_worksheet("Trajectory")
 headers(ws, ["Week of", "OECD stock (mb)", "US SPR (mb)", "Marker"], [10, 16, 13, 42])
-tj = [("27 Feb", 4100, 411, "Eve of war"), ("13 Mar", 4064, 411, "IEA 400 mb release decided"),
-      ("03 Apr", 4000, 400.9, "Global Apr draw -74 mb"), ("08 May", 3825, 384.1, "Record weekly SPR draw 8.6 mb"),
-      ("15 May", 3787, 374.2, "All-time record weekly draw 9.92 mb"), ("29 May", 3711, 357.1, "OECD govt stocks lowest since Dec 1990"),
-      ("19 Jun", 3598, 331.2, "Lowest since 1983; ~46% of action drawn"), ("26 Jun", 3560, 331.2, "As-of; no build week yet")]
+tj = [("27 Feb", 4095, 415.4, "Eve of war (SPR=EIA WCSSTUS1, V)"), ("13 Mar", 4035, 415.4, "IEA 400 mb release decided; SPR still untouched"),
+      ("03 Apr", 3955, 413.3, "First meaningful SPR draws begin"), ("08 May", 3800, 384.1, "SPR draw accelerating ~8-10 mb/wk"),
+      ("15 May", 3755, 374.2, "OECD GOVERNMENT stocks lowest since Dec 1990 (IEA)"), ("29 May", 3680, 357.1, "SPR -8.0 mb on the week"),
+      ("19 Jun", 3595, 331.2, "Latest PUBLISHED EIA week; SPR -84 mb from prewar peak"), ("26 Jun", 3555, 331.2, "wk not yet published (EIA ~1 Jul); SPR carried flat at 19-Jun")]
 for i, (w, o, s, m) in enumerate(tj):
     ws.write(i + 1, 0, w, F["c"]); ws.write_number(i + 1, 1, o, F["c"]); ws.write_number(i + 1, 2, s, F["c"]); ws.write(i + 1, 3, m, F["cell"])
-ws.write(len(tj) + 2, 0, "Inflection: NOT yet turned — both series fall every print through 26 Jun.", F["note_r"])
+ws.write(len(tj) + 2, 0, "SPR = EIA WCSSTUS1 weekly (Verified-official). OECD weekly = Modelled-EST off real IEA monthly anchors (no weekly OECD series).", F["note"])
+ws.write(len(tj) + 3, 0, "Inflection: NOT yet turned — SPR falls every PUBLISHED print through 19 Jun; wk-ending 26 Jun not yet released by EIA.", F["note_r"])
 # native xlsxwriter line chart (Excel-clean)
 chart = wb.add_chart({"type": "line"})
 n = len(tj)
@@ -238,7 +240,9 @@ fns = ["FOOTNOTES & LIMITATIONS", "",
  "Qatar producer block downgraded Inferred->Modelled-EST (self-disclosed tankage + Wikipedia spec).",
  "Ledger: original decomposition double-counted; corrected to single identity; residual -177 mb (~15%).",
  "Foregone output: flat 9.2 mb/d x118d = 1,080 mb indefensible vs flow data; time-weighted ~700-850 mb. REFUTED survives.",
- "VERIFICATION NOT fully independent: IEA OMR / EIA weekly hosts were proxy-403-blocked; anchors WIRE-ATTRIBUTED (one tier below Verified).",
+ "RE-VERIFICATION 29 Jun 26: flow RATES confirmed vs IEA OMR Jun (global -3.8, demand -5, Atlantic +3.5 mb/d; OECD govt -163 mb) & EIA WPSR (SPR 415->331). Cumulative-mb conversions remain analyst constructs (Inferred/EST).",
+ "Ledger tensions: 1,200 gap balances ONLY against flat-rate shut-in (1,080+120); with time-weighted shut-in (~775) effective gap is ~820-970. Observed net draw 495 runs ~10-15% hotter than IEA's literal 3.8 mb/d pace (~448). Atlantic substitution is reallocation, not a 3rd absorption term.",
+ "Producer storage-util % is country-specific ONLY for Iran (~74%, CGEP); others are 'tanks full' qualitative. Floating storage disaggregated only for Iran (Kpler); Kuwait/Qatar crude shut-in mb/d never individually published.",
  "Isolated red team raised 10 substantive attacks; all addressed in-run. Verify verdict: ship.",
  "", "Provenance: workflow run wf_9642a98b-45e, 52 agents, ~1.9M tokens, as-of 26 Jun 2026."]
 for i, t in enumerate(fns):
