@@ -46,7 +46,7 @@ ws = wb.add_worksheet("READ ME"); ws.set_column(0, 0, 140)
 ws.write(0, 0, "Hormuz 2026 — Crude Reserve, Redistribution & Restocking Intelligence", F["title"])
 notes = [
     "",
-    "As-of: 26 Jun 2026  |  War start 28 Feb 2026  |  Window T = 118 days  |  Brent $74.43  |  Hormuz contested-but-flowing ~4.8 mb/d",
+    "As-of: 26 Jun 2026  |  War start 28 Feb 2026  |  Window T = 118 days  |  Brent ~$72  |  Hormuz contested-but-flowing ~4.8 mb/d",
     "",
     ("THESIS VERDICT: the 'reserves are conserved, just redistributed producer-side' hypothesis is REFUTED (strong form).", "r"),
     "  rho = producer build / consumer draw = 120 / 615 = 0.195  (band 0.15-0.26; an order of magnitude below conservation = 1.0).",
@@ -59,8 +59,9 @@ notes = [
     "",
     "CONFIDENCE LADDER:  Verified-official > Inferred-triangulated > Modelled-EST > Absent('-').  A model is at most ONE source class.",
     "",
-    ("CAVEAT (load-bearing): primary IEA OMR / EIA weekly hosts were proxy-blocked at run time, so many cells are WIRE-ATTRIBUTED", "r"),
-    ("(one tier below Verified). Re-pull IEA/EIA directly before putting these decimals in front of a manager.", "r"),
+    ("UPDATE 28 Jun 26: Consumer days + Key Indicators RE-VERIFIED vs Eurostat nrg_stk_oem, IEA oil-stocks tool & EIA WPSR.", "b"),
+    ("  EU stocks sit flat at the ~90d legal floor (net imports fell with stocks). India=EST; China/PH/ID/VN have no official series ('-').", None),
+    ("CAVEAT: the analytic sheets (Ledger / Throughput / Trajectory / Scenarios) keep original wire-attribution — re-pull before external use.", "r"),
     "",
     "Sheets:  Consumer | Producer | Key Indicators | Ledger | Throughput | Trajectory | Scenarios | Footnotes",
 ]
@@ -75,21 +76,21 @@ headers(ws, ["Country", "Before (days)", "Before (months)", "Today (days)", "Tod
         [14, 12, 13, 12, 13, 9, 8, 11, 16, 21, 46])
 consumer = [
     ("USA",          None, None, .08, "Absent",                "EIA WPSR / IEA OMR May-26; net-exporter, metric undefined"),
-    ("Germany",      None, 99.1, .05, "Modelled-EST",          "BMWE/EBV + IEA, 11 Mar 26 (before=110 imputed)"),
-    ("France",       98.0, 98.0, .11, "Inferred-triangulated", "IEA/Euronews/Eurostat, Apr 26"),
+    ("Germany",      91.0, 91.0, .05, "Verified-official",     "Eurostat nrg_stk_oem, Dec-25->May-26 (~90d legal floor)"),
+    ("France",       92.0, 92.0, .11, "Verified-official",     "Eurostat nrg_stk_oem, Dec-25->May-26"),
     ("UK",          104.0, 90.0, .07, "Inferred-triangulated", "GOV.UK/IEA/Al Jazeera, Mar 26"),
-    ("Italy",        None, 90.0, .18, "Inferred-triangulated", "IEA Italy Oil Security / EU Dir 2009/119"),
-    ("Spain",       120.0, 91.0, .06, "Modelled-EST",          "CORES/IEA/Al Jazeera, Mar 26"),
-    ("Netherlands",  None, None, .06, "Absent",                "IEA/COVA; net-exporter, metric undefined"),
-    ("Poland",       None, 86.5, .13, "Modelled-EST",          "IEA Poland Oil Security + model"),
-    ("Japan",       200.0,205.0, .90, "Inferred-triangulated", "S&P/METI-ANRE, 9 May 26"),
-    ("South Korea", 208.0,205.0, .90, "Inferred-triangulated", "IEA tool/CSIS/Sedaily, May 26"),
-    ("China",       122.5,130.0, .46, "Inferred-triangulated", "Reuters-Kemp/EIA, 2026"),
-    ("India",        74.0, 76.0, .30, "Inferred-triangulated", "Min. Puri 76-80d, 8 Jun 26"),
-    ("Thailand",     None,117.0, .55, "Inferred-triangulated", "Thai Energy Ministry, 12 May 26 (on-ground ~56d)"),
-    ("Philippines",  None,46.47, .95, "Inferred-triangulated", "PH DOE OIMB weekly, 12 Jun 26"),
-    ("Indonesia",    None, 21.0, .20, "Inferred-triangulated", "Jakarta Globe/ESDM, Jun 26 (capacity-capped ~25d)"),
-    ("Vietnam",      None, 40.3, .88, "Inferred-triangulated", "VietnamNet D-basis, May 26 (model ~16d; divergence kept)"),
+    ("Italy",        92.0, 92.0, .18, "Verified-official",     "Eurostat nrg_stk_oem, Dec-25->May-26"),
+    ("Spain",        92.0, 92.0, .06, "Verified-official",     "Eurostat nrg_stk_oem, Dec-25->May-26"),
+    ("Netherlands",  90.0, 90.0, .06, "Verified-official",     "Eurostat nrg_stk_oem (days-equiv), Dec-25->May-26"),
+    ("Poland",       90.0, 90.0, .13, "Verified-official",     "Eurostat nrg_stk_oem, Dec-25->May-26"),
+    ("Japan",       200.0,200.0, .90, "Verified-official",     "IEA oil-stocks tool, ~200d net-import, Mar-26"),
+    ("South Korea", 208.0,208.0, .90, "Verified-official",     "IEA oil-stocks tool, ~208d net-import, Mar-26; govt-only ~34d"),
+    ("China",        None, None, .46, "Absent",                "No official net-import days series (NBS) — excluded"),
+    ("India",        None, 60.0, .30, "Modelled-EST",          "EST: govt ~60d (BusinessToday May-26); SPR 9-10d; +commercial 40-45d (Kpler)"),
+    ("Thailand",     None,108.0, .55, "Verified-official",     "Thai Energy Min, 1 May 26 (108d total; on-ground ~49d)"),
+    ("Philippines",  None, None, .95, "Absent",                "No comparable net-import days series (DOE demand-cover only) — excluded"),
+    ("Indonesia",    None, None, .20, "Absent",                "No official net-import days series (ESDM) — excluded"),
+    ("Vietnam",      None, None, .88, "Absent",                "No official days-of-cover series (MOIT) — excluded"),
 ]
 def cell_or_formula(ws, r, col, formula, value, fmt, dash_fmt):
     """write a live formula+cached value, or '-' when the input is missing."""
@@ -142,12 +143,12 @@ for i, row in enumerate(producer):
 ws = wb.add_worksheet("Key Indicators")
 headers(ws, ["Indicator", "Prewar / Before", "Peak", "Now (26 Jun)", "Note"], [28, 28, 14, 18, 42])
 ind = [
-    ("Brent ($/bbl)", "$72 (27 Feb); $65 late-25 anchor", "~$120", "$74.43", "EIA RBRTE + Trading Economics"),
-    ("US SPR (mb)", "411 (31 Dec 25)", "-", "331 (19 Jun)", "46.4% of ~714 nameplate; lowest since 1983"),
-    ("IEA collective release (mb)", "-", "-", "400 (US share 172)", "decided 11 Mar; ~186 executed by 19 Jun"),
+    ("Brent ($/bbl)", "$72 (27 Feb); $65 late-25 anchor", "~$120", "$72 (26 Jun)", "Verified — Trading Economics/Fortune, 26 Jun 26 (low since 27 Feb)"),
+    ("US SPR (mb)", "411 (31 Dec 25)", "-", "331 (19 Jun)", "Verified — EIA WPSR; 46.4% of ~714 nameplate; lowest since 1983"),
+    ("IEA collective release (mb)", "-", "-", "400 auth / ~165 exec", "auth 11 Mar; ~165 mb executed (EST) = OECD govt draw ~163 (IEA OMR Jun); US ~75-80 realized"),
     ("VLCC ($/day MEG-China)", "~$55k", "~$423-470k", "~$179,600", "still >3x prewar"),
     ("War-risk hull premium", "0.10-0.25%", "2.5-5%", "0.3-0.5%", "eased post-ceasefire; reversible"),
-    ("Hormuz flow (mb/d)", "~15", "-", "4.8", "contested-but-flowing; 32% of prewar"),
+    ("Hormuz flow (mb/d)", "~15", "-", "4.8", "Verified — Kpler/Reuters; contested-but-flowing; ~32% of prewar, recovering"),
 ]
 for i, row in enumerate(ind):
     for col, v in enumerate(row):
