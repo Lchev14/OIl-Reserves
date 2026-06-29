@@ -59,10 +59,10 @@ notes = [
     "",
     "CONFIDENCE LADDER:  Verified-official > Inferred-triangulated > Modelled-EST > Absent('-').  A model is at most ONE source class.",
     "",
-    ("UPDATE 29 Jun 26: Consumer, Key Indicators, Producer, Trajectory & Ledger RE-VERIFIED vs IEA OMR, EIA, Eurostat, Kpler & Columbia CGEP.", "b"),
-    ("  Verified = flow RATES + EIA weekly SPR series. Cumulative-mb ledger legs stay Inferred/EST; OECD weekly = Modelled-EST (no weekly OECD series).", None),
+    ("UPDATE 29 Jun 26: ALL 9 sheets reviewed/RE-VERIFIED vs IEA OMR, EIA, Eurostat, Kpler & Columbia CGEP (Consumer, Key Ind, Producer, Trajectory, Ledger, Throughput, Scenarios).", "b"),
+    ("  Verified = flow RATES + EIA weekly SPR series + bypass/throughput. Cumulative-mb ledger legs stay Inferred/EST; OECD weekly = Modelled-EST (no weekly series).", None),
     ("  EU stocks sit flat at the ~90d legal floor (net imports fell with stocks). India=EST; China/PH/ID/VN have no official series ('-').", None),
-    ("CAVEAT: Throughput & Scenarios sheets keep original wire-attribution — re-pull before external use.", "r"),
+    ("CAVEAT: Scenarios are forward PROJECTIONS (Modelled-EST), not data; price anchors map to the named bench. Re-pull primary IEA/EIA before quoting any decimal externally.", "r"),
     "",
     "Sheets:  Consumer | Producer | Key Indicators | Ledger | Throughput | Trajectory | Scenarios | Footnotes",
 ]
@@ -184,14 +184,14 @@ ws.write(13, 2, "~ -177 mb (~15%) = the 615-vs-495 error bar")
 # ============================================================ THROUGHPUT ====
 ws = wb.add_worksheet("Throughput")
 headers(ws, ["Quantity", "mb/d", "Note"], [34, 8, 52])
-tp = [("Hormuz normal crude exit", 15, "prewar baseline"),
-      ("Bypass ceiling", 6.5, "port-gated, not pipeline-gated"),
-      ("  Yanbu / Petroline (Red Sea)", 4.0, "~70% of all bypass; port-limited"),
-      ("  Fujairah / ADCOP (Gulf of Oman)", 1.5, "true bypass; terminal at strait mouth"),
-      ("  Kirkuk-Ceyhan (Med)", 0.2, "north-only; near-zero true relief"),
-      ("  Goreh-Jask", 0.0, "idle since 2024"),
-      ("Hormuz actual flow (now)", 4.8, "contested-but-flowing"),
-      ("Stranded (end-state)", 4.5, "= 15 - bypass 5.7 - Hormuz 4.8")]
+tp = [("Hormuz normal crude exit", 15, "prewar baseline (EIA, V)"),
+      ("Bypass ceiling", 6.5, "realized ~5.7 mb/d; port-gated not pipeline-gated (V)"),
+      ("  Yanbu / Petroline (Red Sea)", 4.0, "Fortune 28 Mar (V); 7 mb/d pipe but Yanbu port caps ~4; ~70% of bypass"),
+      ("  Fujairah / ADCOP (Gulf of Oman)", 1.5, "Kpler 1.62 mb/d Mar (V); true bypass at strait mouth"),
+      ("  Kirkuk-Ceyhan (Med)", 0.2, "The National 16 Mar (V); north-only, near-zero true relief"),
+      ("  Goreh-Jask", 0.0, "idle since 2024 (V)"),
+      ("Hormuz actual flow (now)", 4.8, "Kpler/Reuters late-Jun (V); contested-but-flowing, recovering"),
+      ("Stranded (end-state)", 4.5, "= 15 - bypass 5.7 - Hormuz 4.8 (derived)")]
 for i, (q, v, n) in enumerate(tp):
     ws.write(i + 1, 0, q, F["cell"]); ws.write_number(i + 1, 1, v, F["c"]); ws.write(i + 1, 2, n, F["cell"])
 
@@ -220,13 +220,15 @@ ws = wb.add_worksheet("Scenarios")
 headers(ws, ["", "S1 — Reopen-fast", "S2 — Contested-grinding (base)", "S3 — Reclose-hard"], [18, 34, 38, 38])
 rows = [("Trigger", "Ceasefire converts to settlement; IRGC lifts closure", "Ceasefire holds, doesn't convert; flow ~4.8 reversible", "Ceasefire collapses; physical enforcement / mining"),
         ("Reserves", "Draw stops then reverses; SPR slow refill", "Slow continued draw; SPR 1.29->0.72 mb/d; rho ~0.20", "Draw re-accelerates; Gulf re-strands; rho still <<1"),
-        ("Brent", "$60-68", "$70-85 range, headline spikes decay", "Re-rate toward/above $120"),
+        ("Brent", "$64-75 (JPM/GS '27 bench)", "$70-85; now ~$72 (deal-holds bench)", "$105-130 (Rapidan ~$130 peak; RBC)"),
         ("Restock", "Multi-quarter, bypass-gated; SPR ~3-4 yr", "No restock - net draw continues", "Indefinitely deferred; none in 2026"),
         ("Reserve hard clock", "n/a - draw halts", "~150 mb floor ~Nov 26 at acute rate", "US SPR->150 mb ~5 Nov 26; OECD action ~11 Nov 26")]
 for i, row in enumerate(rows):
     ws.write(i + 1, 0, row[0], F["bold"])
     for col in range(1, 4):
         ws.write(i + 1, col, row[col], F["cell"])
+ws.write(len(rows) + 2, 0, "These are forward PROJECTIONS (Modelled-EST), not verified data. Price anchors map to the named bench:", F["note_b"])
+ws.write(len(rows) + 3, 0, "JPMorgan ~$64 (2027) / Goldman ~$75 / Morgan Stanley ~$80 (deal-holds); Rapidan ~$130 peak / RBC 'risk underpriced' (reclose). Reserve hard-clock dates are EST extrapolations of the acute draw rate.", F["note"])
 
 # ============================================================ FOOTNOTES =====
 ws = wb.add_worksheet("Footnotes"); ws.set_column(0, 0, 150)
