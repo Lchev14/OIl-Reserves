@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Build the Hormuz-2026 reserve-intelligence workbook with LIVE Excel formulas.
 Uses xlsxwriter (Excel-clean output; openpyxl's markup tripped Excel's repair prompt).
-Run: python3 build/build_xlsx.py  ->  OUTPUT_hormuz2026_reserve_intelligence.xlsx
+Run: python3 build/build_xlsx.py  ->  manager/OUTPUT_hormuz2026_reserve_intelligence.xlsx
 Data as-of 26 Jun 2026 (workflow run wf_9642a98b-45e). Wire-attributed where primary
 IEA/EIA hosts were proxy-blocked — re-fetch before external use.
 """
 import xlsxwriter
 
-OUT = "OUTPUT_hormuz2026_reserve_intelligence.xlsx"
+OUT = "manager/OUTPUT_hormuz2026_reserve_intelligence.xlsx"
 wb = xlsxwriter.Workbook(OUT, {"in_memory": True})
 
 # ---- formats ----
