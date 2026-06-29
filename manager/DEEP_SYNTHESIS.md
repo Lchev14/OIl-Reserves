@@ -1,67 +1,124 @@
-# Reserve Depletion & the Restocking-Demand Race — Deep Synthesis
+# Reserve Depletion and the Restocking Question — Deep Analysis
+### 26 June 2026
 
-*State of play: late June 2026. The 2026 Strait of Hormuz crisis (effective closure ~28 Feb) triggered the IEA's 6th-ever collective action and the largest stock drawdown in oil-market history. By the time you read this, the war premium is already deflating — a US-Iran navigation deal (18 Jun), the first tankers re-transiting Hormuz (19 Jun), and a Brent curve that flipped to contango (~24 Jun). The depletion is real; the "race" is mostly a 2027 story.*
+*The analytical companion to the executive briefing. Where the briefing states the conclusions, this document builds the argument: the mechanism of the drawdown, the reserve position in detail, the full restocking calculation, the forecaster landscape, and the scenario logic. Verified figures are drawn from the IEA, EIA and Eurostat; estimates are flagged. Source list in `SOURCES_REVIEWED.md`.*
 
-## 1. The depletion story — what actually drained
+---
 
-Lead with the sharpest fact: **OECD government/strategic inventories fell ~163 mb (-1.8 mb/d) to their lowest level since December 1990** (June OMR). That is the single most robust depletion claim in the entire dataset — and notably, it is the *closest hard proxy* for executed emergency releases, because the IEA publishes no clean cumulative "executed vs authorised" tally.
+## 1. The central paradox, and the thesis that resolves it
 
-The drawdown mechanism was the IEA collective action. On **11 March 2026 the Governing Board agreed 400 mb** (the headline decision); confirmed country pledges on **19 March summed to ~426 mb** — oversubscribed. Split: ~301 mb crude / ~125 mb products; ~280 mb public stocks + ~119 mb industry-obligation + ~28 mb production increases. Regionally Americas ~196–200 mb (~47%), Europe ~108–115 mb (~27%), Asia-Oceania ~107–109 mb (~25–27%).
+Four months into the Hormuz crisis, the oil market presents a paradox. Strategic reserves are at their lowest in a generation — the US Strategic Petroleum Reserve at a 1983 low, OECD government stocks at a 1990 low — and yet Brent crude, having spiked toward $120 in March, has fallen back to roughly $72, almost exactly its level on the eve of the war. A market with the thinnest inventory cover since 2003 is behaving as though the crisis is over.
 
-**Country by country (consumer side):**
-- **US** — the largest single-country contribution in IEA history at **172.2 mb** (all public crude). But here is a critical executed-vs-authorised caveat the red team flagged: the 172 is the *pledge*. EIA weekly data show the SPR fell from ~411–413 mb (end-2025) to **~331 mb by 25 Jun** — a realized release of only ~75–80 mb, the lowest SPR since 1983 (46% of 714 mb capacity). The "172 mb released → 243 mb trough" framing in the refill literature conflates pledge with execution. **Treat ~80 mb executed / ~331 mb as the firm figure.** [confidence: high on EIA stock series]
-- **Japan** — 79.8 mb (54.0 public crude + 25.8 industry products), PM Takaichi's largest-ever release; cover fell from ~254 to ~214 days (consumption basis). On 12 May Japan declared no further release needed.
-- **Korea** 22.46 mb (record); **Germany** 19.5; **France** 14.6; **UK** 14.0 (4.3 crude + 9.7 products); **Türkiye** 11.7; **Spain** 11.6; **Italy** 10.0; **Poland** 7.5 — tailing to Luxembourg 0.1.
+The resolution is the organising thesis of this analysis: **the shock destroyed more oil demand than it removed in refill-able supply, so there is no inventory overhang waiting to be rebuilt, and therefore no price-supportive scramble.** Reserves fell, but the world now consumes enough less oil that it does not need to buy most of those barrels back. Everything else — the producer shut-ins, the IEA release, the bypass pipelines, the China question — is detail underneath that thesis.
 
-**Producer side — depletion that is optical, not consumed.** The drawdowns are mirrored by enormous *involuntary* producer shut-ins, because spare capacity sits trapped behind a blockaded chokepoint. Shut-ins: **Iraq ~3.4 mb/d** (Rumaila, West Qurna-2, Maysan suspended; storage "at capacity," >20 mb stranded on water), **Saudi ~2.0 mb/d** (Safaniya/Zuluf shut in; terminals ~90% full), **Kuwait ~1.9 mb/d** (force majeure 7 Mar, exports to zero), **Iran ~1.5 mb/d** (US naval blockade from ~13 Apr; Kharg tanks ~74% full). These barrels are *parked, not burned* — plus ~100 mb of Middle East floating storage built in March. This is the foundation of the red team's strongest attack: the depletion is partly a relocation of supply, and it returns fast once Hormuz reopens (Iraq projected back above 4 mb/d by early July).
+A second, sharper thesis sits beneath the first and explains *why* the world had to burn through reserves at all: **a chokepoint closure does not conserve global oil by stranding it on the producer side; it destroys it at the wellhead.** The intuition that blocked oil simply piles up in Gulf storage, to be released later, is wrong. We test that claim formally below.
 
-## 2. The global picture
+---
 
-The aggregate is the tightest on record — but mind the denominators. **Total OECD liquid-fuels stocks** are forecast to fall to **~2.3 bn bbl by end-2026** (lowest since the 2003 dataset start), ~0.5 bn below the 2021–25 ~2.8 bn average (EIA STEO). **Days of forward cover drop to ~50** (lowest since Jan 2003, vs >70 pre-conflict) — but this is partly a *denominator artifact*: collapsing demand mechanically lowers days-of-cover even at flat barrels.
+## 2. The mechanism: reserves were destroyed at the wellhead, not relocated
 
-Flow (IEA): cumulative global draw since the war ~**3.8 mb/d** (crude ~2.4 + products ~1.4). Monthly draws: **Mar ~129 mb, Apr ~117 mb, May ~143 mb (-4.6 mb/d)** — accelerating. *Honest caveat:* April has three conflicting figures across the data (frame ~117 mb global; aggregate 74 mb/-2.5 mb/d OECD; on-land -170 / on-water +53). The ~+53 mb that went *onto water* in April confirms part of the "draw" is relocation, not consumption. IEA (-3.8 mb/d) and EIA (Q2 ~-6.3 mb/d) also diverge on methodology.
+When the Strait closed, the natural assumption was that blocked Gulf crude would accumulate as inventory — floating storage and onshore tanks — and that global reserves were therefore being *relocated* from consumers to producers rather than genuinely lost. If that were true, the drawdown in consumer stocks would be roughly matched by a build in producer stocks, and the oil would return to the market once the Strait reopened.
 
-Days-of-cover is genuinely non-comparable cross-country: UK shows ~42 days on *consumption* but 150–250+ on net-imports; **China's "120→195 days" is purely an import-collapse artifact** (flat ~90 days on consumption; stocks actually rose ~25 mb to ~1,240 mb). The robust claim is narrow: OECD *government* stocks at a 35-year low.
+The data refute this. Set the producer-side inventory build against the consumer-side stock draw:
 
-## 3. THE RESTOCKING-DEMAND RACE — the core
+- **Consumer and strategic draw:** roughly 615 million barrels over the war window (an estimate, anchored to the IEA's verified ~3.8 mb/d global stock-draw rate and the ~163 mb fall in OECD government stocks).
+- **Producer-side build:** roughly 120 million barrels — about 100 mb of floating storage plus 20 mb onshore (Kpler tracked 67–100 mb of crude stranded inside the Gulf).
 
-**Verdict: as of late June 2026 this is a counterfactual, not an active bidding war.** Three of four legs are not firing.
+The ratio of producer build to consumer draw is about **0.20** — an order of magnitude below the 1.0 that a "conservation" or "relocation" story would require. The reason is physical: Gulf onshore tankage saturated within roughly two weeks of the closure (Saudi terminals reached an estimated 90 percent capacity by early March), and once storage was full, producers had no choice but to shut wells. Iraq took an estimated 3.4 mb/d off-line, Saudi Arabia about 2.0, Kuwait 1.9, Iran 1.5–2.5. That output was foregone — never produced — not warehoused. The barrels are gone, not waiting.
 
-**Who must refill, and the honest arithmetic.** Naively summing buyer refill needs gives 470 (US) + 186 (EU/IEA) + 76 (JP/KR) + 365 (China) + 63 (India) + 500 (commercial) = **~1,660 mb** — but this is ~1.8× the stated ~900 mb cumulative deficit and **double-counts**: the US 470 conflates crisis-replacement with filling to 714 mb nameplate (a pre-existing structural gap); ~200 mb of SPR exchange-returns are the *same barrels* as the commercial counterparties (Exxon, BP, Macquarie) folded into the 500 mb commercial figure; and the 900 mb deficit itself embeds 400 mb of *authorised* government release when only ~163 mb was executed. **The defensible universe is the ~900 mb cumulative deficit (≈500 mb industry + 400 mb government), and even that overstates executed government draws.**
+This distinction is not academic. It tells us that a reopening does *not* release a hidden flood of stored oil onto the market (there is only the ~100 mb of floating storage, much of which has already begun to clear). It also tells us that the recovery is a *production-restart* story — Gulf wells coming back on — rather than an inventory-release story, which matters for how fast supply normalises.
 
-**The four contestants — asymmetric, not a three-way auction:**
-1. **China (opportunistic/swing)** — named "dominant competitor," but the data refute a present bid: imports collapsed to a ~6.4–7.8 mb/d eight-year low and onshore stocks *drew* (~1,251→1,232 mb, May). China is using its ~1.3–1.4 bn bbl buffer as a *price-suppressing lever* — the opposite of restocking. Its "~1.1 mb/d buying" is 2025 behavior, price-conditional on Brent ≤~$70. *(Internal contradiction: Fortune says stocks rose ~25 mb; the restock section says they drew — both can't be true.)*
-2. **US SPR refill** — accounting, not market demand. ~200 mb is contractual in-kind *exchange-returns* (18–24% premium, Nov 2026–Sep 2028), a reversal of the release, not net new bidding. Discretionary cash buys are *paused* (DOE buys only WTI $50–60; spot is ~$69–70), only ~2–3 mb bought, ~$171 mn appropriated. Physically capped at ~785 k bbl/d (~3 mb/month) vs 4.4 mb/d drawdown — a 5–6× asymmetry.
-3. **Commercial/industry (~500 mb)** — was *blocked by backwardation* (negative carry); the curve only flipped to shallow contango ~24 Jun, finally making storage economic. Refill begins H2 2026, into weakness.
-4. **EU/IEA (~186 mb) + Japan/Korea (~76 mb) + India (~63 mb)** — all explicitly deferred to 2027 / dip-buying. No active refill tenders exist.
+**The drawdown instrument** was the IEA's coordinated release of 11 March, the largest in the agency's history: 400 million barrels authorised, oversubscribed to about 426 mb in pledges. Two points of precision matter for any downstream calculation. First, *authorised is not executed*: only about 165 million barrels have actually been drawn, because members release stock at their own pace. Second, the US pledge of 172 mb has produced roughly 80 mb of realised SPR draw, not the full figure. Analysis that treats the 400 mb headline as delivered supply overstates both the drawdown and the implied refill obligation.
 
-**Sourcing — where barrels physically come from:** Atlantic Basin reroute is the biggest real source (+3.5 mb/d since Feb; Atlantic→Asia ~7 mb/d, ~30% of lost Gulf supply). Pipeline bypass (Yanbu/Fujairah/Ceyhan ~3.6 mb/d) carries *only lighter grades*. **OPEC spare capacity (>4 mb/d) is trapped behind Hormuz** — adding spare behind a blockade yields zero exportable supply. The residual 2Q/3Q26 crude deficit is still ~4.5 mb/d even after the Atlantic surge — closed only by Hormuz reopening. A grade mismatch compounds this: SPR caverns and shut-in Gulf barrels are medium/sour; the Atlantic surge is light/sweet — the contestants are partly chasing *different* barrels.
+---
 
-**Net restock demand with arithmetic (honest version):** Gross restock ≈ 900 mb / ~1,095 days = **0.82 mb/d** (the synthesis rounded *up* to 1.0). Permanent demand destruction offset: China ~0.30–0.60 mb/d (Energy Aspects 0.30 / Rystad 0.20–0.60) + Japan ~0.10–0.20 (an *unsourced author estimate*). Using the **unrounded 0.82**: net = 0.82 − (0.40 to 0.80) = **+0.02 to +0.42 mb/d, midpoint ~+0.27 mb/d** — materially lower than the headlined +0.45. **Either way, net restock (~+0.3 mb/d) is trivial against a forecast 3–5 mb/d glut.** [confidence: low-medium; netted figure is synthesis, not sourced]
+## 3. The reserve position in detail
 
-**Genuine race or second-order?** Second-order and currently *price-dampening* via China's drawdown. The 2026 price driver is the war-supply shock + freight/war-risk wedge (VLCC spot peaked ~$519k/day; insurance $0.25→$0.70–0.80/bbl), not restock bidding. The "floor" is also **self-cancelling** (Rystad: "rallies capped by cessation of restocking due to higher prices"). Restocking is a real *2027 latent floor*, largely fictional as a 2026 auction.
+### The genuine depletion is American and intergovernmental
 
-## 4. Forecaster split on restock
+The US Strategic Petroleum Reserve is the clearest casualty: 411 million barrels at end-2025, 331 million by 19 June — an 80-million-barrel draw that leaves it 46 percent full and at its lowest since 1983. Across the OECD, government-held stocks fell about 163 million barrels to their lowest since December 1990, and total OECD inventories are forecast to end 2026 near 2.3 billion barrels, about 50 days of cover, the thinnest since the series began in 2003.
 
-- **Bullish/tightening:** **Goldman** (~900 mb deficit + reduced spare → structural floor ~$60–75 into mid-2030s); **Energy Aspects/Sen** ("prices may surge excessively" when buyers resume); **RBC/Croft** (China stockpiling as geopolitical leverage; US "may regret not refilling").
-- **Skeptical/oversupplied:** **JPMorgan** — the sharpest: commercial draws came *below* expectations, so "that rebuilding demand is not coming"; Brent ~$78 exit-2026, OPEC+ cuts forced. **Morgan Stanley** — surplus-led, Brent ~$55–60; restock only a lagging H2 balancer. **Rapidan/McNally** — bearish.
-- **Capped floor:** **Rystad** — China restocking is a floor but *self-limiting*; >3 mb/d glut end-2026, ~5 mb/d in 2027; $70+ Brent "unlikely."
+### Europe did not deplete — and the reason is instructive
 
-## 5. Timeline
+Measured in days of import cover, the major European holders barely moved: Germany 91, France 92, Italy 92, Spain 92, the Netherlands 90, Poland 90 — all close to the 90-day legal floor, and essentially flat from December 2025 (verified against Eurostat). This is not evidence that Europe was insulated. It is a denominator effect: days-of-cover is stocks divided by net imports, and European net imports fell roughly in step with stocks, holding the ratio constant. The lesson for interpretation is that *coverage ratios are a poor gauge of absolute depletion during an import shock* — they can stay flat while real barrels leave the system. The honest measure of depletion is the absolute stock level, which is why the US SPR and OECD government series, not the European coverage ratios, carry the story.
 
-- **Restock *begins* ~Nov 2026** — first exchange-return barrels (Big Hill ready) + first opportunistic buys, contingent on Hormuz normalizing.
-- **Exchange returns run Nov 2026 → Sep 2028** (~200 mb, +18–24% in-kind).
-- **No new Hormuz bypass capacity until 2027** (UAE Habshan-Fujairah expansion, ~50% complete, doubles Fujairah to ~3.6 mb/d).
-- **US SPR back to ~414 mb pre-crisis ~July 2028; full ~714 mb ~2031** (S&P) at ~3 mb/month.
-- **~4-month macro CPI pass-through lag** means consumer relief trails the crude-price fall by a quarter, even before the multi-year physical refill.
+### Asia held large buffers; the data-dark countries stayed dark
 
-## 6. Bottom line for a procurement / commodity-intelligence manager
+Japan and South Korea entered and remain in the crisis with very large buffers — roughly 200 and 208 days of net-import cover respectively — though both reduced private-stockholding mandates to meet their IEA release pledges. China is a special case discussed in Section 4. For several Asian importers — China, the Philippines, Indonesia, Vietnam — no official, comparable days-of-net-import series exists; we have deliberately left these blank rather than publish a falsely precise figure, and flagged India's ~60-day reading as an estimate assembled from ministerial statements rather than a clean series.
 
-**The 3 things that matter:**
-1. **The depletion is real but partly optical and reversing.** The robust fact is OECD *government* stocks at a Dec-1990 low (~-163 mb). But producer shut-ins (~9 mb/d) + ~100 mb floating storage mean supply is *parked, not lost*; Hormuz reopening (deal 18 Jun, contango 24 Jun) is already collapsing the scarcity premium. Plan for a fast reflood, grade-constrained on medium/sour.
-2. **There is no live restock bidding war right now.** China is a seller/absent, US refill is paused accounting, commercial refill was blocked until the contango flip. Net restock is ~+0.3 mb/d against a 3–5 mb/d projected glut. Do **not** procure as if a barrel-bidding war is imminent.
-3. **Restocking is a soft 2027 price floor, not a 2026 spike.** It is self-cancelling and back-loaded (Nov 2026 onward). Use sub-$70 dips to lock term cover before the floor activates.
+### The producer side, with appropriate humility
 
-**The key uncertainty:** Whether OECD commercial stocks were ever *deeply* drawn (JPM says no → rebuild demand is fiction) versus genuinely depleted (Goldman/Sen → latent floor). This single question determines whether 2027 is a glut or a tightening.
+Country-level producer data is thinner than the consumer side and we are explicit about it. Shut-in volumes are reasonably well sourced for Iraq, Saudi Arabia, Kuwait and Iran. Storage utilisation, however, is genuinely country-specific only for Iran (about 74 percent of Kharg Island capacity, per Columbia CGEP); for the others, "tanks full" is a qualitative report, and floating-storage figures are mostly available only as a Gulf aggregate. Qatar's situation is distinctive and verified: Iranian strikes on Ras Laffan removed about 17 percent of its LNG capacity (12.8 million tonnes a year, a three-to-five-year repair) and, with it, roughly a quarter of its condensate output as a gas-stream by-product — an involuntary casualty of the gas infrastructure rather than a deliberate oil cut.
 
-**What to watch:** (a) IEA OMR commercial-stock-vs-5yr-avg tables Aug–Dec 2026; (b) Kpler/Vortexa China onshore tank gauges + whether the JPM-predicted August state refill fires above the ~$70 trigger; (c) EIA weekly SPR series (WCSSTUS1) for *actual* net additions and DOE *award* (not solicitation) notices; (d) sustained Brent contango + Brent-Dubai/light-heavy spreads — sustained contango refutes the scarcity/race thesis outright.
+---
+
+## 4. The restocking question, in full
+
+The central commercial question is whether the world now faces a multi-year scramble to refill — a bidding war that would keep prices structurally elevated. The answer is no, and the argument has three parts: the buyers, the constraints, and the arithmetic.
+
+### The four potential buyers, and why three are inactive
+
+**China** is the buyer the market fears most, and it is currently doing the opposite of restocking. Holding well over a billion barrels of strategic and commercial stock, China is *drawing down* and importing at an eight-year low. Its behaviour is a price-reaction function: it accumulates aggressively below roughly $70 a barrel and withdraws above $75–80, and its 2025 energy law institutionalises corporate stockpiling. The entity holding the world's largest reserve is, in effect, short the rally and long the dip — a volatility dampener, not a restocking bidder. Any forecast that adds "Chinese restocking" as incremental bullish demand is double-counting against a net seller.
+
+**The US SPR** cannot be the swing buyer, for mechanical reasons. Of the refill that is occurring, roughly 200 million barrels is contractual exchange-returns — oil owed back under earlier swap agreements — rather than fresh market purchasing. Discretionary buying is paused because the government will pay only $50–60 a barrel against a market near $70. And the reserve can physically absorb only about three million barrels a month against a drawdown that ran near four million a day; full refill is a late-2020s project. The salt caverns are also physically degraded from repeated rapid cycling, further capping intake.
+
+**Commercial traders and refiners** were structurally unable to rebuild through the spring. The futures curve was in backwardation — prompt oil more expensive than later-dated — which makes holding inventory a money-losing carry. Only when the curve flipped into contango around 24 June did the economics of storage turn positive. This is the single most important timing point in the whole restocking question: commercial restock was not *absent by choice*, it was *blocked by the curve*, and it only becomes possible in the second half of 2026.
+
+**Governments with legal obligations** — the EU, Japan, Korea, India — have all deferred their rebuilds to 2027 or to opportunistic dip-buying, and several are meeting obligations by easing private-stockholding rules rather than buying.
+
+### Why a fast refill is impossible even if willed
+
+Three hard constraints cap any refill independent of intent. OPEC's spare capacity of more than four million barrels a day sits *behind* the blocked Strait and cannot reach the market. The bypass pipelines (Saudi Petroline to Yanbu, the UAE's Habshan–Fujairah line) are already at their port-gated limits, and no new capacity arrives before 2027. And there is a grade mismatch: the barrels drawn down were medium and sour, while the replacement supply surging from the Atlantic basin is light and sweet — so the SPR's sour caverns and Asia's sour-configured refiners are partly chasing a different molecule than the one on offer.
+
+### The arithmetic: net restocking demand is negligible
+
+The decisive calculation nets the refill requirement against destroyed demand.
+
+- **Gross refill need:** on a conservative basis, roughly 300 million barrels (the ~165 mb actually released plus the ~120 mb of genuinely stranded producer stock). On a fuller basis that counts the entire cumulative deficit, perhaps 900 million barrels.
+- **Demand destroyed:** the IEA estimates second-quarter 2026 consumption fell about 5 million barrels a day year-on-year — on the order of 470 million barrels over the period.
+
+Demand that has been destroyed does not need to be re-supplied. Netting the two, the additional buying the world actually requires is close to zero — our central estimate is within roughly a third of a million barrels a day of neutral, against a market that forecasters expect to be three to five million barrels a day *oversupplied* by year-end. This is the quantitative core of the thesis, and it is why Brent has round-tripped to its pre-war level despite record-low reserves.
+
+### The one variable that matters: permanent versus cyclical demand
+
+The honest weakness in this conclusion is the demand-destruction assumption. If the lost consumption is permanent — driven into recession by high prices and higher-for-longer interest rates — then the net refill need is negative and the market stays soft for years. If it is cyclical and snaps back as prices fall, a modest refill pull re-emerges in 2027. Note what this dependency is *not*: it is not a question of oil logistics or chokepoint geography. It is a question about the global economy and the Federal Reserve's reaction function. The two prior reports in this file disagreed on the sign of net restocking demand (one negative, one slightly positive) precisely because they made different assumptions on this single point; the disagreement is real but immaterial to the practical conclusion, because either way the magnitude is trivial against the glut.
+
+---
+
+## 5. The forecaster landscape
+
+The professional consensus is not a number; it is a split, and the split is itself the signal. The institutions divide cleanly by what they believe the Strait will do.
+
+The constructive-but-not-alarmed camp prices a market that stays open: Goldman Sachs around $75–80, JPMorgan about $78 (having reset to a "demand-soft, post-supply-shock" framing), Morgan Stanley near $80, and the EIA around $79 for 2027 (its near-term model lags higher). Goldman is the most structurally bullish, arguing that a cumulative inventory deficit and reduced OPEC spare capacity keep the market tighter than before. JPMorgan is the most skeptical of a refill, observing that commercial draws came in below expectations and concluding that "that rebuilding demand is not coming."
+
+The tail-risk camp prices re-closure: Rapidan warns of a peak near $130 and a recession rivalling 2008, and RBC argues the market is underpricing the risk that flows stay below pre-war levels. The gap between roughly $75 and roughly $130 is not a forecasting failure to be split down the middle — it is the market honestly representing a binary outcome.
+
+---
+
+## 6. Scenarios and the probability of each
+
+Because the outcome turns on a political and military question, the forward distribution is genuinely three-peaked, and a clean reopening is not the most likely peak.
+
+**A — Flow normalises (about 35 percent).** The ceasefire converts to a durable settlement, the Strait reopens steadily, the drawdown stops and a gradual rebuild begins in 2027. Brent settles into the $64–80 range. The red-team critique of this scenario is fair and worth carrying: it should be read as a *glide path, not a V-shaped recovery*, the assumption that a 60-day political pause becomes a durable settlement is doing a lot of work, and a tight-inventory market sliding into contango is a mild internal tension to watch rather than to assume away.
+
+**B — Intermittent disruption (about 50 percent).** This is the modal path, and it is the one the comfortable "crisis is over" narrative ignores. The ceasefire holds imperfectly, with repeated short closures triggered by Lebanon flare-ups (Iran has explicitly linked the Strait to Israeli operations there) and by the mid-August expiry of the 60-day diplomatic window. Prices spike to $95–115 on each scare and fall back. Reserves drift lower in a jittery pattern; commercial rebuild repeatedly stalls.
+
+**C — Sustained re-closure (about 10–15 percent).** The ceasefire collapses, Iran enforces a genuine closure, and a direct US–Iran confrontation follows. Brent re-rates to $115–150 and the demand-destruction debate becomes a recession debate. We hold this probability *low* deliberately: enforcing a months-long closure runs against Iran's own revenue interest and China's leverage, and the 1987–88 Tanker War demonstrated that the Strait stays open even under sustained attack. The 20 June re-closure, which reversed within a week, is the template — loud but short.
+
+The practical reading is that a clean, durable reopening is the minority case; some form of renewed disruption is more likely than not, but most probably in the manageable, oscillating form rather than the catastrophic one.
+
+---
+
+## 7. Implications and what to monitor
+
+For a procurement or commodity-intelligence function, four conclusions carry through.
+
+The first is not to position for a refill war that the evidence says is not coming, when the largest reserve-holder is selling into strength. The second is to use price weakness — dips below $70 — to secure forward term cover before the latent 2027 rebuild and any future US buy-the-dip mandate put a floor under the market. The third, and most easily overlooked, is that the relevant cost has *not* fully normalised even though flat-price crude has: war-risk insurance premiums rose roughly tenfold and tanker freight quadrupled, so the delivered cost of a barrel into Asia remains elevated, and the sour-sweet grade spread is where the genuine squeeze now lives. The fourth is to treat the macroeconomy — the path of interest rates and recession risk — as the true swing variable for demand, and therefore for whether any refill pull materialises at all.
+
+Four indicators will reveal which scenario is unfolding, in roughly the order they will move: war-risk insurance premiums (the truest signal that oil can actually flow, and the first to re-spike on any scare); tanker transit counts through the Strait; the shape of the Brent curve (contango confirms de-escalation, a snap to steep backwardation warns of disruption); and the mid-August diplomatic deadline together with the situation in Lebanon, which is the most probable trigger for renewed closure.
+
+---
+
+## Method and confidence
+
+Figures are *verified* when taken directly from a named primary source — the IEA Oil Market Report, EIA weekly and STEO data, Eurostat emergency-stock statistics — and *estimated* when modelled or assembled from secondary reporting. Verified here: the SPR and OECD stock levels, Brent, the IEA release authorisation, European coverage ratios, the verified flow rates underlying the ledger (global draw 3.8 mb/d, demand −5 mb/d, Atlantic substitution +3.5 mb/d). Estimated: the net-restocking figure, the cumulative-barrel ledger legs, per-country strategic-stock levels in barrels, India's coverage, country-level Hormuz-dependence shares, and all forward scenarios. The underlying agent-level evidence is preserved in `DEEPDIVE_AGENT_OUTPUTS.md` and `PANEL_OUTPUTS.md`; the data workbook is `manager/OUTPUT_hormuz2026_reserve_intelligence.xlsx`. This is a fast-moving situation built on a forward-dated dataset; primary releases should be re-checked before any figure is quoted externally.
